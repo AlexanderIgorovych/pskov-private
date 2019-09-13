@@ -1,0 +1,33 @@
+<div class="psa-component">
+  <mat-card class='order-docs-verify'>
+      <app-add-photo
+        [nameType]="'psa'"
+        [title]="'СДЕЛАЙТЕ ФОТО ПОДПИСАННОГО ПСА'"
+        [files]="filesPsa"
+        [textContent]="'Оператор отправит заявление на печать в течени нескольких минут'"
+        (photoPicked)="generateFile($event, filesPsa)"
+        (photoDeleted)="deletePhoto($event, filesPsa)">
+      </app-add-photo>
+      <mat-card-footer>
+        <div class='order-docs-btn'>
+          <div *ngIf="verifyOrderPsaConf" class="container-psa-verify">
+            <img src="../../../../../../../assets/confirm-phone.png" alt="IconSucc">
+            <p>Фото ПСА отправлено оператору</p>
+          </div>
+          <button [disabled]='!areFilled || verifyOrderPsaConf' class='succ-submit' (click)="sendPsa()">
+            ОТПРАВИТЬ ОПЕРАТОРУ
+          </button>
+        </div>
+      </mat-card-footer>
+  </mat-card>
+
+  <div class='btn-container'>
+    <div *ngIf="verifyOrderPsaConf" class="container-psa-verify mobile">
+      <img src="../../../../../../../assets/confirm-phone.png" alt="IconSucc">
+      <p>Фото ПСА отправлено оператору</p>
+    </div>
+    <button (click)='toWeight()' [disabled]='!verifyOrderPsaConf' class='verfy-button verify-btn-end'>
+      ЗАВЕРШИТЬ ОФОРМЛЕНИЕ
+    </button>
+  </div>
+</div>

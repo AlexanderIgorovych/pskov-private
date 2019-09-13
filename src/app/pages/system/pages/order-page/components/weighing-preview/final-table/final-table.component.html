@@ -1,0 +1,153 @@
+<div class="final-table-container">
+
+  <!-- Header -->
+  <div class="container-header">
+    <p>ФИНАЛЬНАЯ ТАБЛИЦА ВЗВЕШИВАНИЙ</p>
+    <button (click)="backToNewWeighHandle()">ВЕРНУТЬСЯ К ПРОМЕЖУТОЧНОЙ ТАБЛИЦЕ</button>
+  </div>
+
+  <!-- Table Section -->
+  <div class="table-section">
+
+    <!-- Color Metal -->
+    <div class="scrap-color-metal">
+      <div class='table-header'>
+        <p>ЛОМ ЦВЕТНЫХ МЕТАЛЛОВ</p>
+      </div>
+
+      <table #inputTd cellspacing='0' class='table-color'>
+        <tr class="main-row">
+          <td>№</td>
+          <td>Вид лома</td>
+          <td>Происхождение цветмета</td>
+          <td>Вес нетто с засором</td>
+          <td class='waste'>
+            <span>Засор,%</span>
+            <svg *ngIf="!inputHide && colorMetTableData.length !== 0" (click)="showInput()" class='edit-icon' width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M3 17.2501V21.0001H6.75L17.81 9.94006L14.06 6.19006L3 17.2501ZM20.71 7.04006C21.1 6.65006 21.1 6.02006 20.71 5.63006L18.37 3.29006C17.98 2.90006 17.35 2.90006 16.96 3.29006L15.13 5.12006L18.88 8.87006L20.71 7.04006Z" fill="#109754"/>
+            </svg>
+            <svg class='edit-icon' *ngIf="inputHide" (click)="saveInputValue()" width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M9.00016 16.807L4.83016 12.6541L3.41016 14.0583L9.00016 19.6253L21.0002 7.67471L19.5902 6.27051L9.00016 16.807Z" fill="#109754"/>
+            </svg>
+          </td>
+          <td>Вес нетто без засора</td>
+        </tr>
+          <tr *ngIf="colorMetTableData.length == 0" class='table-info'>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+          </tr>
+          <tr *ngFor="let color of colorMetTableData; let idx = index" class='table-info'>
+            <td>{{ idx + 1 }}</td>
+            <td>{{ color.typeScrap }}</td>
+            <td>-</td>
+            <td>{{ color.weighNet !== null ? color.weighNet : '-' }}</td>
+            <td>
+                <div *ngIf="!inputHide">{{ color.waste !== null ? color.waste : '-' }}</div>
+                <input
+                  value="{{ color.waste || null }}"
+                  id="{{ color.id }}"
+                  class='rowInp'
+                  *ngIf="inputHide"
+                  name="waste-perc-{{ idx + 1 }}"
+                  placeholder="0.00"
+                  #valueWaste
+                  type="text">
+            </td>
+            <td>{{ color.weigh }}</td>
+          </tr>
+      </table>
+
+    </div>
+
+    <!-- Black Metal -->
+    <div class="scrap-color-metal">
+      <div class='table-header'>
+        <p>ЛОМ ЧЕРНЫХ МЕТАЛЛОВ</p>
+      </div>
+      <table #blackTable cellspacing='0' class='table-color'>
+        <tr class="main-row">
+          <td>№</td>
+          <td>Вид лома</td>
+          <td class='netto-waste'>Вес нетто с засором</td>
+
+          <td class='waste'>
+            <span>Засор,%</span>
+            <svg *ngIf="!inputHideBlack && blackMetTableData.length !== 0" (click)="showInputBlack()" class='edit-icon' width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M3 17.2501V21.0001H6.75L17.81 9.94006L14.06 6.19006L3 17.2501ZM20.71 7.04006C21.1 6.65006 21.1 6.02006 20.71 5.63006L18.37 3.29006C17.98 2.90006 17.35 2.90006 16.96 3.29006L15.13 5.12006L18.88 8.87006L20.71 7.04006Z" fill="#109754"/>
+            </svg>
+            <svg *ngIf="inputHideBlack" (click)="saveInputValueBlack()" class='edit-icon' width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M9.00016 16.807L4.83016 12.6541L3.41016 14.0583L9.00016 19.6253L21.0002 7.67471L19.5902 6.27051L9.00016 16.807Z" fill="#8F8F8F"/>
+            </svg>
+          </td>
+
+          <td>Вес нетто без засора</td>
+        </tr>
+        <tr *ngIf="blackMetTableData.length === 0" class='table-info'>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+        </tr>
+        <tr *ngFor="let black of blackMetTableData; let idx = index" class="table-info">
+            <td>{{ idx + 1 }}</td>
+            <td>{{ black.typeScrap }}</td>
+            <td>{{ black.weighNet !== null ? black.weighNet : '-' }}</td>
+            <td>
+              <div *ngIf="!inputHideBlack">{{ black.waste !== null ? black.waste : '-' }}</div>
+              <input
+                value="{{ black.waste }}"
+                id="{{ black.id }}"
+                class='rowInp'
+                *ngIf="inputHideBlack"
+                name="waste-perc-{{ idx + 1 }}"
+                placeholder="0.00"
+                #valueWaste
+                type="text">
+            </td>
+            <td>{{ black.weigh }}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="optional-value-container">
+    <div class="optional-header">
+      <p>ТИП И ВЕС МУСОРА (ЕСЛИ ЕСТЬ)</p>
+    </div>
+    <div class="optional-body">
+      <form [formGroup]="optionalForm">
+        <div class="optinal-value type-waste">
+          <p>ТИП МУСОРА</p>
+          <mat-select (ngModelChange)="handleOptionalValue(typeGrarbage)" #typeGrarbage formControlName="typeGrarbage" placeholder="Тип не указан" class="input-main">
+
+            <mat-option value="vale">
+              VALUE
+            </mat-option>
+
+          </mat-select>
+        </div>
+
+        <div class="optional-value waste">
+          <p>ВЕС МУСОРА</p>
+          <input
+            (ngModelChange)="handleOptionalValue(weighGarbage)"
+            #weighGarbage
+            formControlName="weighGarbage"
+            class='inp-optional-waste'
+            type="text"
+            placeholder="0.0">
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="finally-button">
+    <button disabled class='perc-waste'>Укажите % засора</button>
+    <button (click)="sendWeighning()" [disabled]="!validationValue" class='submit-data'>ОТПРАВИТЬ РЕЗУЛЬТАТЫ ОПЕРАТОРУ</button>
+  </div>
+</div>

@@ -1,0 +1,71 @@
+<div class='verification-qiwi-numb'>
+  <mat-card class='mat-card-ver'>
+    <app-section-card>
+      <span title>ВЫДАЧА КАРТЫ QIWI</span>
+      <ng-container body>
+        <div class='verif-qiwi-body'>
+          <h3>ПОДТВЕРДИТЕ НОВЫЙ НОМЕР ТЕЛЕФОНА</h3>
+          <p>Код был отправлен на указанный номер</p>
+
+          <!-- Form Verification -->
+          <form (keydown.enter)="$event.preventDefault()" #formVerify (ngSubmit)="sendVerificationCode()" [formGroup]="formNumberVerify">
+             <div class="number-section">
+                <p>{{ cardValue }}</p>
+                <button
+                  [disabled]="nextStepBtn"
+                  (click)="onOpenModal()"
+                  class='change-number'
+                  type='button'>
+                    <span class='desktop-block-content'>УКАЗАТЬ ДРУГОЙ НОМЕР</span>
+                    <span class='mobile-phone-block'>ИСПОЛЬЗ. НОМЕР</span>
+                </button>
+             </div>
+              <div class="recieve-cod-section">
+                <p class='get-code-par'>Введите полученный код</p>
+                <div class="timer-comp">
+                  <input
+                    [readonly]="attemptFailed"
+                    #code
+                    [ngClass]="{ error : errorCode !== null || code.invalid }"
+                    formControlName="code"
+                    placeholder="Код"
+                    type="text">
+                  <div class="timer-section">
+                    <span class='timer-code' *ngIf="!nextStepBtn">{{ minute }}:{{ timeLeft }}</span>
+                    <button
+                    [disabled]="btn1cVerify"
+                    (click)="sendCodeAct()"
+                    type='button'
+                    [disabled]="!resendCode">ОТПРАВИТЬ КОД ПОВТОРНО</button>
+                  </div>
+                </div>
+                <div *ngIf="errorCode !== null" class="error-section">
+                  <span *ngIf="!attemptFailed">{{ errorCode }}</span>
+                  <span *ngIf="attemptFailed">Неверный код. Подтвердите вручную через 1С</span>
+                </div>
+              </div>
+          </form>
+
+        </div>
+      </ng-container>
+    </app-section-card>
+    <mat-card-footer>
+    <!-- Verification Footer -->
+    <div class="verification-footer">
+      <div *ngIf="numberVerificated" class='number-verificated-success'>
+        <img src="assets/confirm-phone.png" alt="Succ">
+        <p>Номер успешно подтвержден</p>
+      </div>
+      <div class='btn-container'>
+        <button (click)="handleResetNumber()" mat-flat-button class="button button-primary">ОТМЕНА</button>
+        <button [disabled]="formNumberVerify.invalid || nextStepBtn || attemptFailed" mat-flat-button class="button button-primary">ПОДТВЕРДИТЬ ЧЕРЕЗ 1С</button>
+      </div>
+    </div>
+
+    </mat-card-footer>
+  </mat-card>
+  <div class="btn-container-succ">
+    <button [disabled]="!nextStepBtn || errorCode !== null" (click)="handleRedirectPage(2)">ПРОДОЛЖИТЬ</button>
+  </div>
+
+</div>

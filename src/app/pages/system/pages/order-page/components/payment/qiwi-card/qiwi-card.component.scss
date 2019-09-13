@@ -1,0 +1,1087 @@
+$green : #109754;
+
+@mixin textStyle($size, $fw) {
+  color: #293B5A;
+  font-family: 'Roboto', sans-serif;
+  font-size: $size;
+  margin-bottom: 0;
+  font-weight: $fw;
+}
+
+@mixin styleBtnStart {
+  border: none;
+  background-color: $green;
+  border-radius: 2px;
+  font-size: 14px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  height: 36px;
+  width: 180px;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2), 0px 2px 2px rgba(0, 0, 0, 0.12), 0px 0px 2px rgba(0, 0, 0, 0.14);
+}
+
+@mixin verifyContainer($maxWidth, $mRight, $mTop, $mTopImg) {
+  display: flex;
+  margin-top: $mTop;
+
+  img {
+    width: 17px;
+    height: 13px;
+    margin-top: $mTopImg;
+  }
+
+  p {
+    color: #2070CD;
+    font-size: 12px;
+    font-family: 'Roboto', sans-serif;
+    margin-left: 6px;
+    width: $maxWidth;
+    margin-right: $mRight;
+  }
+}
+
+@mixin btnGreenBord {
+  padding: 0 16px;
+  height: 36px;
+  border: 1px solid $green;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: 'Roboto', sans-serif;
+  color: $green;
+  background-color: transparent;
+  transition: all .3s;
+}
+
+@mixin succBtn($mrgTop) {
+  height: 36px;
+  background-color: $green;
+  color: #fff;
+  font-size: 'Roboto', sans-serif;
+  border-radius: 2px;
+  padding: 0 15px;
+  margin-top: $mrgTop;
+  border: none;
+}
+
+.btn-say-no {
+  @include btnGreenBord
+}
+
+.container-card-verify-res {
+  @include verifyContainer(240px, 5px, 1px, 10px);
+}
+
+.qiwi-card-payment {
+  ::ng-deep {
+    .creator-block {
+      min-height: auto;
+      height: fit-content;
+      margin: 0;
+    }
+  }
+}
+
+.number-partner-select {
+
+  .form-select-number {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .add-number {
+    display: flex;
+
+    div {
+      height: 20px;
+      width: 20px;
+      color: #fff;
+      font-size: 16px;
+      border-radius: 50%;
+      text-align: center;
+      background-color: $green;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+
+    p {
+      margin-left: 10px;
+      color: $green;
+      font-family: 'Roboto', sans-serif;
+    }
+  }
+}
+
+
+.error-message-section {
+
+
+  p {
+    position: absolute;
+    padding: 0;
+    font-size: 12px;
+    bottom: 73px;
+    margin-left: 45px;
+    color: red;
+    font-family: 'Roboto', sans-serif;
+  }
+}
+
+.content-qiwi-card-add {
+  max-width: 790px;
+  margin-top: 20px;
+  padding: 0;
+
+  .btn-container {
+    border-top: 1px solid #E7EAEF;
+    padding-top: 15px;
+
+
+    button:first-child {
+      @include btnGreenBord;
+      height: 36px;
+      margin-top: 10px;
+      width: 120px;
+      box-shadow: 1px 2px 3px rgba(0, 0, 0, .1);
+      margin-bottom: 25px;
+    }
+
+    button:last-child {
+      color: #fff;
+      margin-top: 10px;
+      font-family: 'Roboto', sans-serif;
+      background-color: $green;
+      width: 260px;
+      margin-left: 20px;
+      height: 36px;
+      box-shadow: 1px 2px 3px rgba(0, 0, 0, .1);
+      margin-bottom: 25px;
+    }
+
+    button:last-child:disabled {
+      background-color: #CECDCD;
+    }
+  }
+}
+
+.add-card-qiwi-start {
+  display: flex;
+  cursor: pointer;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500px;
+  font-size: 14px;
+  color: $green;
+  top: 1px;
+  position: relative;
+  margin-right: 60px;
+  align-items: center;
+
+  span {
+    margin-left: 0px;
+    margin: 0;
+    padding: 0;
+    font-weight: 500;
+  }
+}
+
+.btn-client-card-qiwi {
+  @include styleBtnStart;
+}
+
+.btn-client-card-qiwi:disabled {
+  background-color: #CECDCD;
+}
+
+.add-card-to-system {
+  padding: 0;
+}
+
+.number-partner-select{
+  max-width: 600px;
+  margin-left: 20px;
+
+  .card-mat-sel {
+    padding-top: 0;
+    padding: 0;
+    margin-top: 0;
+  }
+
+  .header-select {
+    background-color: $green;
+    width : 100%;
+
+    p {
+      padding: 0;
+      margin: 0;
+      font-size: 16px;
+      color: #fff;
+      font-weight: 500;
+      font-family: 'Roboto', sans-serif;
+      padding-top: 13px;
+      padding-left: 20px;
+      padding-bottom: 12px;
+    }
+  }
+
+  hr {
+    margin-top: 30px;
+    opacity: 0.5;
+    width: 100%;
+  }
+
+  .title-numb {
+    width: 100%;
+
+    p {
+      margin-left: 20px;
+      margin-top: 27px;
+      text-transform: uppercase;
+      @include textStyle(15px, 500)
+    }
+  }
+
+  .form-numb-select {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin-top: 15px;
+
+    .mat-select-sel {
+      width: 50%;
+      margin-top: 5px;
+      padding-top: 8px;
+      border-radius: 2px;
+      border: 1px solid #949DAD;
+      height: 28px;
+      padding-left: 10px;
+      color: #787F86;
+      font-size: 14px;
+      font-family: 'Roboto', sans-serif;
+      background-color: #F9F9F9;
+    }
+
+    .add-number {
+      width: 40%;
+
+      p {
+        margin-top: 15px;
+      }
+    }
+  }
+
+
+  .form-button {
+    button {
+      margin-top: 10px;
+      margin-right: 40px;
+      margin-bottom: 20px;
+      @include styleBtnStart;
+    }
+
+    button:disabled {
+      background-color: #CECDCD;
+    }
+  }
+}
+
+.btn-verification-docs {
+  @include succBtn(20px);
+}
+
+.add-number-qiwi {
+
+  .add-number-header {
+    display: flex;
+    background-color: $green;
+    height: 44px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+
+    span {
+      color: #fff;
+      margin-left: 30px;
+      font-size: 16px;
+      font-family: 'Roboto', sans-serif;
+      font-weight: 500;
+      margin-top: 13px;
+    }
+  }
+
+  .verify-title {
+    p {
+      @include textStyle(18px, 500);
+      margin-top: 20px;
+      margin-left: 30px;
+    }
+  }
+
+  .add-qiwi {
+    position: relative;
+    margin-left: 30px;
+
+    label {
+      position: relative;
+      left: 25px;
+      @include textStyle(14px, 300);
+    }
+
+    input {
+      border-radius: 2px;
+      border: 1px solid #949DAD;
+      background-color: #F9F9F9;
+      height: 38px;
+      padding-right: 45px;
+      @include textStyle(14px, 300);
+      width: 282px;
+      margin-top: 25px;
+      padding-left: 24px;
+    }
+    input::placeholder {
+      font-weight: 500;
+      color: #CECDCD;
+    }
+
+    span {
+      top: 25px;
+      left: 325px;
+      position: absolute;
+      color: #fff;
+    }
+  }
+}
+
+.photo-container-card {
+  padding: 0;
+}
+
+.btn-say-no:disabled {
+  background-color: transparent;
+  border: 1px solid #CECDCD;
+  color: #CECDCD;
+  font-weight: 500;
+}
+
+.container-verif {
+  max-width: 600px;
+  margin-left: 17px;
+}
+
+.order-docs-verify, .photo-container {
+  margin-top: 30px;
+  margin-left: 17px;
+  max-width: 780px;
+}
+
+
+.number-btn-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 45px;
+  width: 600px;
+}
+
+.form-btn-footer {
+  border-top: 1px solid #DBDBDB;
+  padding-top: 20px;
+  width: 100%;
+}
+
+.card-verif {
+  margin-top: 30px;
+
+  h4 {
+    @include textStyle(16px, 500)
+  }
+
+  p {
+    font-size: 14px;
+    color: #293B5A;
+    mix-blend-mode: normal;
+    opacity: 0.5;
+    margin-left: 25px;
+    max-width: 335px;
+  }
+
+  .select-way {
+    margin-top: 23px;
+    display: flex;
+    flex-direction: column;
+
+    .radio-btn:not(:first-child) {
+      margin-top: 15px;
+    }
+
+    .radio-btn {
+      @include textStyle(16px, 500)
+    }
+  }
+}
+
+.container-psa-verify {
+  @include verifyContainer(131px, 70px, 12px, 17px);
+}
+
+.btn-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+  flex-direction: row;
+  max-width: 761px;
+  margin-bottom: 30px;
+
+  button {
+    width: 205px;
+    height: 36px;
+  }
+
+  .error-section {
+    margin-right: 10px;
+    position: relative;
+    top: 26px;
+    color: red;
+  }
+
+  .btn-verification-docs {
+    margin-right: 25px;
+  }
+}
+
+.verfy-button {
+  @include succBtn(21px)
+}
+
+.verfy-button:disabled {
+  background-color: #CECDCD;
+}
+
+button.verify-btn-end:disabled {
+  background-color: #CECDCD;
+}
+
+.order-docs-btn {
+  display: flex;
+  border-top: 1px solid #DBDBDB;
+  width: 100%;
+  justify-content: flex-end;
+
+  button {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  button:not(:last-child) {
+    @include btnGreenBord
+    margin-right: 37px;
+    transition: all .2s;
+
+    &:hover {
+      background-color: $green;
+      color: #fff;
+    }
+  }
+
+  button.succ-submit:disabled {
+    background: #CECDCD;
+    color: #fff;
+  }
+
+  button.succ-submit {
+    @include succBtn(20)
+    margin-right: 30px
+  }
+
+  button.change-way-btn:disabled {
+    background-color: transparent;
+    border: 1px solid #CECDCD;
+    color: #CECDCD;
+    font-weight: 500;
+  }
+}
+
+.verfication-cards {
+  margin-top: 20px;
+
+  h3 {
+    color : #293B5A;
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+  }
+
+  p {
+    font-size: 14px;
+    color: #949DAD;
+    font-family: 'Roboto', sans-serif;
+  }
+
+  hr {
+    background-color: #DBDBDB;
+  }
+
+  .content-ver {
+    padding-bottom: 20px;
+    border-bottom: 1px solid #DBDBDB;
+  }
+
+  .verification-button {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 18px;
+    margin: 0 20px;
+
+    button {
+      @include btnGreenBord
+    }
+
+    button:hover {
+      background-color: $green;
+      color: #fff;
+    }
+
+    button:not(:first-child){
+      margin-left: 36px;
+    }
+  }
+}
+
+.succ-text {
+  display: flex;
+
+  span {
+    width: 190px;
+    color: #2070CD;
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+    margin-right: 40px;
+    margin-left: 9px;
+    margin-top: 4px;
+  }
+}
+
+.verify-next {
+  display: flex;
+  justify-content: flex-end;
+  width: 770px;
+  button {
+    margin-top: 40px;
+    @include styleBtnStart;
+    width: 180px;
+    color: #fff;
+  }
+
+  button:disabled {
+    background-color: #CECDCD;
+  }
+}
+
+@media (min-width: 0) and (max-width: 320px) {
+
+  .add-card-qiwi-start {
+    margin-right: 20px;
+    padding: 0;
+  }
+
+  .form-btn-footer {
+    position: relative;
+
+    button.btn-client-card-qiwi {
+      min-width: 135px;
+      font-size: 14px;
+      margin-left: 0;
+    }
+  }
+
+  .container-card-verify-res {
+    margin-left: 20px;
+    position: relative;
+    left: 20px;
+    margin-right: 0;
+    padding: 0;
+  }
+
+  .number-partner-select {
+    position: relative;
+    margin-left: 0;
+
+    .header-select {
+
+      p {
+        margin-left: 0;
+        padding-left: 5px;
+        font-size: 14px;
+      }
+    }
+
+    .title-numb {
+      margin-left: 5px;
+
+      p {
+        margin-left: 0;
+        padding-left: 0;
+        font-size: 14px;
+      }
+    }
+
+    .form-button {
+      margin: 0;
+      padding: 0;
+
+      button {
+        width: 136px;
+        margin-right: 23px;
+      }
+    }
+
+    .form-numb-select {
+      display: flex;
+      flex-direction: column;
+
+      .mat-select-sel {
+        width: 265px;
+        margin-left: 5px;
+        padding-top: 10px;
+      }
+
+      .add-number {
+        width: 130px;
+        font-size: 12px;
+        bottom: 23px;
+        left: 0px;
+        margin: 0;
+        right: 10px;
+        padding: 0;
+        position: absolute;
+        margin-left: 5px;
+
+        p {
+          margin: 0;
+          padding: 0;
+        }
+
+        div {
+          display: none;
+        }
+      }
+    }
+  }
+
+  .card-qiwi {
+
+    .succ-text {
+      display: none;
+    }
+  }
+
+  .add-card-qiwi-start {
+    span {
+      font-size: 12px;
+      padding-left: 10px;
+    }
+
+    .step-button-icon {
+      display: none;
+    }
+  }
+
+
+  // add new phone number component
+
+  .content-qiwi-card-add {
+
+    .input-number-verify {
+      margin-left: 0;
+      padding-left: 0;
+
+    }
+
+    .add-number-header {
+      span {
+        margin-left: 15px;
+      }
+    }
+
+    .verify-title p {
+      margin-left: 15px;
+      font-size: 14px;
+    }
+
+    .add-qiwi {
+      margin-left: 0;
+
+      input {
+        margin-top: 10px;
+        width: 240px;
+        margin-left: 0;
+        padding-right: 0;
+        padding-left: 24px;
+      }
+    }
+
+    .btn-container {
+      display: flex;
+      flex-direction: column-reverse;
+      align-items: flex-end;
+      margin-right: 10px;
+
+      button:last-child {
+        margin-bottom: 5px;
+      }
+    }
+  }
+
+  .verify-next {
+    width: 280px;
+  }
+
+  .photo-container {
+    .photo-container-card {
+
+      .creator-block-footer {
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: flex-end;
+
+        button:first-child {
+          font-size: 12px;
+          margin-right: 0;
+        }
+
+        button:last-child {
+          margin-top: 20px;
+          font-size: 12px;
+          margin-bottom: 10px;
+        }
+      }
+    }
+  }
+
+  .verfication-cards {
+    .verification-button {
+      display: flex;
+      flex-direction: column-reverse;
+      align-items: flex-end;
+
+      button:last-child {
+        margin-bottom: 10px;
+      }
+
+      button {
+        margin-right: 0;
+      }
+    }
+  }
+
+  // choose way of submit component
+
+  .select-way {
+
+    .radio-btn {
+      color: #293B5A;
+      font-family: 'Roboto', sans-serif;
+      font-size: 14px;
+      margin-bottom: 0;
+      font-weight: 500;
+    }
+
+    ::ng-deep .mat-radio-label-content {
+      width: 150px;
+      // height: 100px;
+      word-wrap: break-word;
+    }
+  }
+
+
+  // statement photo component
+
+  .order-docs-verify {
+    .order-docs-btn {
+      display: flex;
+      flex-direction: column-reverse;
+      align-items: flex-end;
+
+      // button:last-child {
+      //   margin-bottom: 10px
+      // }
+
+      button:last-child {
+        margin: 0;
+        margin-top: 10px;
+        margin-right: 10px;
+      }
+
+      button:first-child {
+        margin: 0;
+        margin-top: 10px;
+        margin-right: 10px;
+        margin-bottom: 10px;
+      }
+
+      button {
+        font-size: 14px;
+      }
+    }
+  }
+
+  .order-docs-btn {
+    position: relative;
+
+    .container-psa-verify {
+      position: absolute;
+      top: 110px;
+      left: 0;
+
+      p {
+        width: 320px;
+      }
+    }
+  }
+}
+
+@media (min-width: 321px) and (max-width: 700px) {
+
+  .qiwi-card-payment {
+    ::ng-deep {
+      .creator-block {
+        min-width: 330px;
+      }
+    }
+  }
+
+
+  .add-card-qiwi-start {
+    margin-right: 20px;
+    padding: 0;
+  }
+
+  .form-btn-footer {
+    position: relative;
+
+    button.btn-client-card-qiwi {
+      min-width: 135px;
+      font-size: 14px;
+      margin-left: 0;
+    }
+
+  }
+
+  .number-partner-select {
+    position: relative;
+    margin-left: 0;
+    width: 335px;
+    margin-top: 10px;
+
+    .header-select {
+
+      p {
+        margin-left: 0;
+        padding-left: 10px;
+        font-size: 14px;
+      }
+    }
+
+    .title-numb {
+      margin-left: 10px;
+
+      p {
+        margin-left: 0;
+        padding-left: 0;
+        font-size: 14px;
+      }
+    }
+
+    .form-button {
+      margin: 0;
+      padding: 0;
+
+      button {
+        width: 136px;
+        margin-right: 33px;
+      }
+    }
+
+    .form-numb-select {
+      display: flex;
+      flex-direction: column;
+
+      .mat-select-sel {
+        width: 300px;
+        margin-left: 10px;
+        padding-top: 10px;
+      }
+
+      .add-number {
+        width: 130px;
+        font-size: 12px;
+        bottom: 23px;
+        left: 0px;
+        margin: 0;
+        right: 10px;
+        padding: 0;
+        position: absolute;
+        margin-left: 10px;
+
+        p {
+          margin: 0;
+          padding: 0;
+        }
+
+        div {
+          display: none;
+        }
+      }
+    }
+  }
+
+  .card-qiwi {
+
+    .succ-text {
+      display: none;
+    }
+  }
+
+  .add-card-qiwi-start {
+    span {
+      font-size: 12px;
+      padding-left: 10px;
+    }
+
+    .step-button-icon {
+      display: none;
+    }
+  }
+
+  // add new phone number component
+
+  .content-qiwi-card-add {
+
+    .input-number-verify {
+      margin-left: 0;
+      padding-left: 0;
+
+    }
+
+    .add-number-header {
+      span {
+        margin-left: 15px;
+      }
+    }
+
+    .verify-title p {
+      margin-left: 15px;
+      font-size: 14px;
+    }
+
+    .add-qiwi {
+      margin-left: 0;
+
+      input {
+        margin-top: 10px;
+        width: 290px;
+        margin-left: 0;
+        padding-right: 0;
+        padding-left: 23px;
+      }
+    }
+
+    .btn-container {
+      display: flex;
+      flex-direction: column-reverse;
+      align-items: flex-end;
+      margin-right: 10px;
+
+      button:last-child {
+        margin-bottom: 5px;
+      }
+    }
+  }
+
+  .verify-next {
+    width: 340px;
+  }
+
+  .photo-container {
+
+    .photo-container-card {
+
+      .creator-block-footer {
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: flex-end;
+
+        button:first-child {
+          font-size: 12px;
+          margin-right: 0;
+        }
+
+        button:last-child {
+          margin-top: 20px;
+          font-size: 12px;
+          margin-bottom: 10px;
+        }
+      }
+    }
+  }
+
+  .verfication-cards {
+    .verification-button {
+      display: flex;
+      flex-direction: column-reverse;
+      align-items: flex-end;
+
+      button:last-child {
+        margin-bottom: 10px;
+      }
+
+      button {
+        margin-right: 0;
+      }
+    }
+  }
+
+  // statement photo component
+  .order-docs-verify {
+    .order-docs-btn {
+      display: flex;
+      flex-direction: column-reverse;
+      align-items: flex-end;
+
+      // button:last-child {
+      //   margin-bottom: 10px
+      // }
+
+      button:last-child {
+        margin: 0;
+        margin-top: 10px;
+        margin-right: 10px;
+      }
+
+      button:first-child {
+        margin: 0;
+        margin-top: 10px;
+        margin-right: 10px;
+        margin-bottom: 10px;
+      }
+
+      button {
+        font-size: 14px;
+      }
+    }
+  }
+
+  .order-docs-btn {
+    position: relative;
+
+    .container-psa-verify {
+      position: absolute;
+      top: 110px;
+      left: 0;
+
+      p {
+        width: 320px;
+      }
+    }
+  }
+}

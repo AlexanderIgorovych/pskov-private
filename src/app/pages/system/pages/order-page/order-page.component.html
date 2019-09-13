@@ -1,0 +1,118 @@
+<!-- <div class="order">
+  <mat-toolbar class="order-header">
+    <div class="container order-header-body">
+      <button class='back-icon-btn' mat-icon-button>
+        <mat-icon class='back-icon' [routerLink]="['/system']" aria-label="Example icon-button with a heart icon">arrow_back</mat-icon>
+      </button>
+      <span class="order-title">{{ orderTypeTitle }}</span>
+    </div>
+  </mat-toolbar>
+
+  <div class="block">
+    <div class="tabs">
+
+      <mat-tab-group
+        class="scrollbar"
+        [selectedIndex]="selected"
+        (selectedIndexChange)="selected = $event; onSelectedChange(selected)"
+        color="none">
+
+    <div *ngIf="selectedPage === 0">
+      <mat-tab
+        [disabled]="selectedPage === 0"
+        *ngFor="let item of menuItems; let i = index"
+        [label]="item.label">
+
+        <app-responsible-storage></app-responsible-storage>
+        <app-weighing-preview [isDefault]="true" [recievedData]='selected' *ngIf="i === 1"></app-weighing-preview>
+
+      </mat-tab>
+    </div>
+
+    <div *ngIf="selectedPage === 1">
+      <mat-tab
+        [label]="item.label"
+        *ngFor="let item of menuItems; let i = index">
+        <app-paperwork-preview (eventPageTabChange)="onSelectedChange($event)" *ngIf="i === 0"></app-paperwork-preview>
+        <app-weighing-preview [isDefault]="true" [recievedData]='selected' *ngIf="i === 1"></app-weighing-preview>
+      </mat-tab>
+    </div>
+
+    <div *ngIf="selectedPage === 2">
+      <mat-tab
+        [label]="item.label"
+        *ngFor="let item of menuItems; let i = index">
+
+        <app-shipment-customer (handleSelectedPage)="onSelectedChange($event)" *ngIf="i === 0"></app-shipment-customer>
+        <app-weighing-preview [isDefault]="false" [recievedData]='selected' *ngIf="i === 1"></app-weighing-preview>
+
+      </mat-tab>
+    </div>
+
+    <div *ngIf="selectedPage === 3">
+      <mat-tab
+        [label]="item.label"
+        *ngFor="let item of menuItems; let i = index">
+
+        <app-shipment-customer (handleSelectedPage)="onSelectedChange($event)" *ngIf="i === 0"></app-shipment-customer>
+        <app-weighing-preview [isDefault]="false" [recievedData]='selected' *ngIf="i === 1"></app-weighing-preview>
+
+      </mat-tab>
+    </div>
+
+    <div *ngIf="selectedPage === 4">
+      <mat-tab
+        [label]="item.label"
+        *ngFor="let item of menuItems; let i = index">
+
+        <app-shipment-customer (handleSelectedPage)="onSelectedChange($event)" *ngIf="i === 0"></app-shipment-customer>
+        <app-weighing-preview [isDefault]="false" [recievedData]='selected' *ngIf="i === 1"></app-weighing-preview>
+
+      </mat-tab>
+    </div>
+
+    <div *ngIf="selectedPage === 5">
+      <mat-tab
+        [label]="item.label"
+        *ngFor="let item of menuItems; let i = index">
+
+        <app-shipment-customer (handleSelectedPage)="onSelectedChange($event)" *ngIf="i === 0"></app-shipment-customer>
+        <app-weighing-preview [isDefault]="false" [recievedData]='selected' *ngIf="i === 1"></app-weighing-preview>
+
+      </mat-tab>
+    </div> -->
+
+    <!-- <div *ngIf="selectedPage === 6">
+      <mat-tab
+        *ngFor="let item of menuItems; let i = index"
+        [label]="item.label">
+
+        <app-shipment-goods (weighNext)="onSelectedChange($event)" *ngIf="i === 0"></app-shipment-goods>
+        <app-weighing-preview [isDefault]="false" withCutter="true" [recievedData]='selected' *ngIf="i === 1"></app-weighing-preview>
+      </mat-tab>
+    </div> -->
+    <!-- Sort of AC -->
+    <!-- <div *ngIf="selectedPage === 7">
+      <mat-tab
+        *ngFor="let item of menuItems; let i = index"
+        [label]="item.label">
+
+        <app-shipment-goods (weighNext)="onSelectedChange($event)" *ngIf="i === 0"></app-shipment-goods>
+        <app-weighing-preview [isDefault]="false" withCutter="true" [recievedData]='selected' *ngIf="i === 1"></app-weighing-preview>
+      </mat-tab>
+    </div> -->
+
+
+    <!-- <div *ngIf="selectedPage === 8">
+      <mat-tab
+        *ngFor="let item of menuItemsInvertory; let i = index"
+        [label]="item.label">
+
+        <app-weighing-preview [isDefault]="false" withCutter="false" [recievedData]='2'></app-weighing-preview>
+      </mat-tab>
+    </div>
+
+      </mat-tab-group>
+    </div>
+  </div>
+</div> -->

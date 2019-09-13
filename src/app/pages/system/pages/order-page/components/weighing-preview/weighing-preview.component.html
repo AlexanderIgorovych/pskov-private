@@ -1,0 +1,76 @@
+<div class="container">
+  <div *ngIf="pageCount === 0">
+
+    <mat-card class='block-order'>
+      <!-- Components which presented here - just view components. They should't contain logic of component -->
+        <app-new-weight
+          [defaultCar]="pickedCar"
+          [wasWeighAdded]="weighWasAdded"
+          (handleClickCount)="countOfClick()"
+          (handleNewRow)="createNewRow()"
+          [cuttersList]="cuttersList"
+          [tableType]="typeTable"
+          [carsList]="cars"
+          [scroll]="scrollBool"
+          (scrollEmit)="handleScroll()"
+          (changedSelect)="handleChangeSelect($event)"
+          (editValueScrap)="editValueHandler($event)"
+          [displayScraps]="scrapsList"
+          [displayAmountBigs]="amountBigbags"
+          [displayTypeAction]="typeAction"
+          [displayListBigsList]="bigbags"
+          [displayWeighList]="weightList"
+          [displayTypeWeigh]="typeBigbags"
+          [displayTares]="tareList"
+          [editMode]='editModeVal'
+          (updateTable)="updateTableValue($event)"
+          (valueRetPatch)="patchVal()"
+          [patch]="valuePatch"
+          (allowChangeTable)="isChangeAllowed($event)">
+        </app-new-weight>
+    </mat-card>
+
+    <mat-card class='table-component'>
+      <app-table-weigh
+        *ngFor="let element of tableTypes"
+        [isSelectedContainer]="isContainerSelected"
+        (containerCreate)="createContainer()"
+        (handleMobile)="mobileTableHandler()"
+        [defaultTable]="isDefault"
+        (tableSubmit)="onChangeSubRoute()"
+        (tableRowNew)="createNewRow()"
+        (markAsIssue)="handleIssue($event)"
+        (editTableById)="onEditTable($event)"
+        [isChangeAllow]="isAllowChange"
+        [tableType]="typeTable"
+        [isContainer]="element"
+        [tableData]="element === 'weighning' ? tableList : containerData">
+      </app-table-weigh>
+    </mat-card>
+  </div>
+  <!-- Mobile  -->
+  <div class="block-order">
+    <mat-card *ngIf="pageCount === 2" class='table-component'>
+      <app-table-weigh
+        [isMobile]="true"
+        (handleMobile)="mobileTableHandler()"
+        [defaultTable]="isDefault"
+        (tableSubmit)="onChangeSubRoute()"
+        (tableRowNew)="createNewRow()"
+        (editTableById)="onEditTable($event)"
+        [isChangeAllow]="isAllowChange"
+        [tableType]="typeTable"
+        [tableData]="tableList">
+      </app-table-weigh>
+    </mat-card>
+  </div>
+
+  <div *ngIf="pageCount === 1">
+    <mat-card class='block-order'>
+      <app-final-table
+        (backToNewWeigh)="weighBack()"
+        [selectedPage]="pageCount">
+      </app-final-table>
+    </mat-card>
+  </div>
+</div>

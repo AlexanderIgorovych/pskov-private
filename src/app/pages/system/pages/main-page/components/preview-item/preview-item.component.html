@@ -1,0 +1,9 @@
+<button mat-raised-button>
+  <div class="preview-text">
+    <div class="preview-text__car">
+      {{ order.car.plate_number }}
+    </div>
+    <div class="preview-text__title">{{ orderType }} от {{ order.date_create | date:'yyy.LL.dd в HH:mm' }}</div>
+  </div>
+  <div class="preview-icon"><mat-icon>chevron_right</mat-icon></div>
+</button>

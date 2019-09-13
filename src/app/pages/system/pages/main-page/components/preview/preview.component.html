@@ -1,0 +1,31 @@
+<div class="container">
+  <mat-card class="block-content">
+    <div class="loader">
+      <img *ngIf="loader" src="assets/ajaxLoader.gif" alt="Loader">
+    </div>
+    <!-- <app-responsible-storage-list *ngIf="currentTab === 1"></app-responsible-storage-list> -->
+    <div class="preview" *ngIf="!loader">
+      <app-preview-item
+        [order]="element"
+        class="preview-item"
+        *ngFor="let element of elements | paginate : { id : 'currentWeigh', itemsPerPage: 10, currentPage : currPage, totalItems : total }">
+      </app-preview-item>
+    </div>
+    <div *ngIf="currentTab === 1" class="responsible-storage-list">
+      <p *ngIf="!elements" class="preview-empty">{{ empty_state }}</p>
+    </div>
+  </mat-card>
+  <div *ngIf="currentTab === 0" class="notifications-paginator paginator">
+     <pagination-controls
+        id="currentWeigh"
+        directionLinks="true"
+        autoHide="true"
+        responsive="true"
+        previousLabel=""
+        nextLabel=""
+        screenReaderPaginationLabel="Pagination"
+        screenReaderPageLabel="page"
+        (pageChange)="handlePage($event)">
+     </pagination-controls>
+  </div>
+</div>

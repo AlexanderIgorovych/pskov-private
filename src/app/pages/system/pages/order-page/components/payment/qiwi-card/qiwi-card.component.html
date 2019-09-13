@@ -1,0 +1,287 @@
+<div class="qiwi-card-payment" *ngIf="subpage == 0">
+  <app-form-card class='card-qiwi' [title]="'ВЫБЕРИТЕ КАРТУ КЛИЕНТА'">
+    <form [formGroup]='form' body (ngSubmit)="onSubmitClientCard()">
+        <mat-select placeholder="Карта не выбрана" formControlName='phone_number' class="input-main">
+
+          <mat-option *ngFor="let card of cardsValues" value="{{ card.id }}">
+            **{{card.number.toString().slice(14, 19)}} (привязка к номеру {{ card.phone_number }})
+          </mat-option>
+
+        </mat-select>
+    </form>
+    <div footer class="form-button form-btn-footer">
+
+      <div *ngIf="clientSubm" class="succ-text">
+
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M9.00003 16.1701L4.83003 12.0001L3.41003 13.4101L9.00003 19.0001L21 7.00009L19.59 5.59009L9.00003 16.1701Z" fill="#2070CD"/>
+        </svg>
+        <span>Запрос о выплате на выбранную карту отправлен оператору</span>
+
+      </div>
+
+      <div
+        *ngIf="!clientSubm"
+        (click)="toOrderPay(1)"
+        class="add-card-qiwi-start">
+        <div class="step-button-icon"><mat-icon>add_circle</mat-icon></div>
+        <span>ДОБАВИТЬ КАРТУ</span>
+      </div>
+
+      <button
+      class='btn-client-card-qiwi'
+      (click)="onSubmitClientCard()"
+      type="submit"
+      [disabled]="form.invalid || clientSubm">ВЫБРАТЬ КАРТУ</button>
+    </div>
+  </app-form-card>
+</div>
+<div *ngIf="subpage == 1">
+  <div class='number-partner-select'>
+    <mat-card class='card-mat-sel'>
+      <div class='header-select'>
+        <p>ВЫДАЧА КАРТЫ QIWI</p>
+      </div>
+      <mat-card-title class='title-numb'>
+        <p>НОМЕР ТЕЛЕФОНА ЛОМОСДАТЧИКА</p>
+      </mat-card-title>
+
+        <mat-card-content>
+          <form class='form-numb-select' (ngSubmit)='onSubmitPartNumber()' [formGroup]='formNumber' body>
+            <mat-select class='mat-select-sel' placeholder='Номер не выбран' formControlName='partner_number'>
+
+              <mat-option *ngFor="let card of cardsValues" value="{{card.phone_number}}">
+                {{ card.phone_number }}
+              </mat-option>
+
+            </mat-select>
+            <div (click)="toOrderPay(7)" class="add-number">
+                <div>+</div>
+                <p>ДОБАВИТЬ НОВЫЙ НОМЕР</p>
+            </div>
+          </form>
+        </mat-card-content>
+
+      <hr>
+      <mat-card-footer>
+        <div footer class="form-button">
+          <button
+          class='btn-qiwi-start'
+          [disabled]="formNumber.invalid"
+          (click)="onSubmitPartNumber()"
+          type="submit">ВЫБРАТЬ НОМЕР
+        </button>
+        </div>
+      </mat-card-footer>
+    </mat-card>
+    <div class="number-btn-container">
+      <button
+        (click)="goToPsa()"
+        [disabled]="!numberSaved"
+        mat-flat-button
+        color="none"
+        class="button button-primary"
+      >
+        ПРОДОЛЖИТЬ
+      </button>
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="subpage == 6">
+  <app-phone-verification-qiwi
+  (resetPhonePageData)="resetDataNumber()"
+  (confirmed)="confirmed()"
+  [cardValue]='newCardQiwi'
+  (numberReset)="resetNumber()"
+  (pageRedirect)="toOrderPay($event)" >
+</app-phone-verification-qiwi>
+</div>
+
+
+
+<div *ngIf='subpage == 7'>
+  <mat-card class='content-qiwi-card-add'>
+    <mat-card-content class='card-qiwi'>
+      <div class='add-number-qiwi' body>
+        <div class="add-number-header">
+          <span>ВЫДАЧА КАРТЫ QIWI</span>
+        </div>
+        <ng-container body>
+
+          <div class="verify-title">
+              <p>ДОБАВЬТЕ НОМЕР ТЕЛЕФОНА</p>
+          </div>
+          <div class="add-qiwi">
+            <form class='input-number-verify'  [formGroup]='formVerifyNumber'>
+
+              <label for="controlPhone">+7</label>
+              <input id="controlPhone" #verifyInput placeholder="0987654321" formControlName="verifyNumb" type="text">
+              <span (click)="verifyInput.value = ''" *ngIf="verifyInput.value.length >= 3">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M20 10C14.47 10 10 14.47 10 20C10 25.53 14.47 30 20 30C25.53 30 30 25.53 30 20C30 14.47 25.53 10 20 10ZM25 23.59L23.59 25L20 21.41L16.41 25L15 23.59L18.59 20L15 16.41L16.41 15L20 18.59L23.59 15L25 16.41L21.41 20L25 23.59Z" fill="#CECDCD"/>
+                </svg>
+              </span>
+
+            </form>
+          </div>
+
+        </ng-container>
+      </div>
+
+      <div *ngIf="errorMess" class="error-message-section">
+
+        <div *ngIf="verifyN.errors.minlength && verifyN.touched" class="min-length-error">
+          <p>Слишком короткий номер</p>
+        </div>
+
+        <div *ngIf="verifyN.errors.maxlength && verifyN.touched" class="max-length-err">
+          <p>Слишком длинный номер</p>
+        </div>
+
+      </div>
+      <div class="btn-container">
+        <button (click)="toOrderPay(1)" >
+          ОТМЕНИТЬ
+        </button>
+        <button [disabled]="formVerifyNumber.invalid || numberVerified" mat-flat-button class='button-order-card' (click)="onVerifyNumberSub()">
+          ОТПРАВИТЬ ЗАПРОС ОПЕРАТОРУ
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <div class="verify-next">
+    <button (click)="toOrderPay(6)" [disabled]="!numberVerified">ПРОДОЛЖИТЬ</button>
+  </div>
+</div>
+
+<div *ngIf="subpage == 2">
+  <div class="photo-container">
+    <mat-card class='photo-container-card'>
+      <mat-card-content>
+        <app-section-card>
+          <span title>ДОБАВЛЕНИЕ КАРТЫ В СИСТЕМУ</span>
+          <ng-container body>
+            <app-add-photo
+              [nameType]="'cover'"
+              [title]="'ДОБАВЬТЕ ФОТО КОНВЕРТА'"
+              [files]="filesCard"
+              (photoPicked)="generateFile($event, filesCard)"
+              (photoDeleted)="deletePhoto($event, filesCard)"
+            ></app-add-photo>
+            <app-add-photo
+              [nameType]="'photo'"
+              [title]="'ДОБАВЬТЕ ФОТО КАРТЫ'"
+              [files]="filesEnvelope"
+              (photoPicked)="generateFile($event, filesEnvelope)"
+              (photoDeleted)="deletePhoto($event, filesEnvelope)"
+            ></app-add-photo>
+
+            <div class="creator-block-footer row">
+              <div *ngIf="verificationBool" class="container-card-verify-res">
+                <img src="../../../../../../../assets/confirm-phone.png" alt="IconSucc">
+                <p>Реквизиты карты отправлены оператору</p>
+              </div>
+              <button (click)="toOrderPay(0)" [disabled]='verificationBool' class='button btn-say-no' mat-flat-button>
+                ОТМЕНА
+              </button>
+              <button
+                [disabled]="!areFilled || verificationBool"
+                (click)="onPhotoCardSubmit()"
+                mat-flat-button
+                class="button button-primary"
+                type="submit"
+                color="none"
+              >
+                ОТПРАВИТЬ ОПЕРАТОРУ
+              </button>
+            </div>
+          </ng-container>
+        </app-section-card>
+      </mat-card-content>
+    </mat-card>
+    <mat-card *ngIf="verificationBool" class="verfication-cards">
+      <mat-card-title><h3>ПОДТВЕРДИТЕ ПРОХОЖДЕНИЕ ИДЕНТИФИКАЦИИ</h3></mat-card-title>
+      <mat-card-content class='content-ver'>
+        <p>При выборе варианта «Не подтверждаю» вам нужно будет выбрать  другой способ оплаты.
+        Добавленная ранее карта сохранится в системе. </p>
+      </mat-card-content>
+      <mat-card-footer class="verification-button">
+        <button id="denyVer"  (click)="disableBtn('ЧЕРЕЗ QIWI')">НЕ ПОДТЕРЖДАЮ</button>
+        <button id="allowVer" (click)="verificationRes($event)">ПОДТЕРЖДАЮ</button>
+      </mat-card-footer>
+    </mat-card>
+  </div>
+    <div class="btn-container">
+
+      <div class="error-section" *ngIf="isAlreadyExError">
+        <div class='input-error'>Не разрешено создатавать более 5-ти карт</div>
+      </div>
+      <button
+        (click)="onSendQiwiCard()"
+        [disabled]="!paymentVerification || isAlreadyExError"
+        mat-flat-button
+        class="button button-primary btn-verification-docs"
+      >
+        ПРОДОЛЖИТЬ
+      </button>
+   </div>
+</div>
+
+<div *ngIf='subpage == 3'>
+  <div class="container-verif">
+    <mat-card class='card-verif'>
+      <mat-card-title><h4>ВЫБЕРИТЕ СПОСОБ АКТИВАЦИИ КАРТЫ</h4></mat-card-title>
+      <mat-card-content>
+          <mat-radio-group class='select-way'>
+              <mat-radio-button (change)='onChangeRadio($event)' checked="true" value='numb-way' class='partn-numb-way radio-btn'>
+                активация с телефона ломосдатчика
+              </mat-radio-button>
+              <mat-radio-button (change)='onChangeRadio($event)' value='one-c' class='one-c-way radio-btn'>
+                запросить активацию через 1С
+              </mat-radio-button>
+          </mat-radio-group>
+        <p>Активция занимает некоторое время. Дождитесь,
+        пока оператор отправит заявление на печать.</p>
+      </mat-card-content>
+    </mat-card>
+    <div class='btn-container'>
+      <button (click)="toOrderPay(4)" class='verfy-button'>
+        ПРОДОЛЖИТЬ
+      </button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf='subpage == 4'>
+  <mat-card class='order-docs-verify'>
+      <app-add-photo
+        [nameType]="'statement'"
+        [textContent]="'Оператор отправит заявление на печать
+в течени нескольких минут'"
+        [title]="'СДЕЛАЙТЕ ФОТО ПОДПИСАННОГО ЗАЯВЛЕНИЯ'"
+        [files]="filesOrder"
+        (photoPicked)="generateFile($event, filesOrder)"
+        (photoDeleted)="deletePhoto($event, filesOrder)"
+      ></app-add-photo>
+      <mat-card-footer>
+        <div class='order-docs-btn'>
+          <div *ngIf="verifyOrderDocsConf" class="container-psa-verify">
+            <img src="../../../../../../../assets/confirm-phone.png" alt="IconSucc">
+            <p>Фото заявления отправлено оператору.</p>
+          </div>
+          <button (click)="toOrderPay(3)" type='button' class='change-way-btn'>ИЗМЕНИТЬ СПОСОБ АКТИВАЦИИ</button>
+          <button [disabled]='!orderFilled || verifyOrderDocsConf' class='succ-submit' (click)="onOrderStatement()">
+            ОТПРАВИТЬ ЗАПРОС
+          </button>
+        </div>
+      </mat-card-footer>
+  </mat-card>
+  <div class='btn-container'>
+    <button [disabled]='!verifyOrderDocsConf' (click)="goToPsa()" class='verfy-button verify-btn-end'>
+      ПРОДОЛЖИТЬ
+    </button>
+  </div>
+</div>

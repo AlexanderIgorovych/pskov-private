@@ -1,0 +1,35 @@
+<div class="block">
+  <div class="tabs">
+    <mat-tab-group
+      class="scrollbar"
+      [selectedIndex]="selected"
+      (selectedIndexChange)="selected = $event; onSelectedChange()"
+      color="none">
+
+      <mat-tab
+        *ngFor="let item of menuItems; let i = index"
+        [label]="item.label">
+
+        <!-- Current weights list -->
+        <app-preview
+          *ngIf="i === 0"
+          [currentTab]="selected"
+          [total]="todtalData"
+          [currPage]="currentPage"
+          [elements]="menuItems[0].data"
+          [empty_state]="item.empty_state"
+          [loader]="ajaxLoader"
+          (changeHandlePage)="handlePageChanger($event)"
+        ></app-preview>
+        <!-- Responsible Storage List -->
+        <app-responsible-storage-list
+           (searchDataByValue)="onFilteredSearch($event)"
+           (loadOnChange)="onLoadResponsible($event)"
+           [ajaxLoader]="ajaxLoaderStorage"
+           *ngIf="i === 1">
+        </app-responsible-storage-list>
+
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

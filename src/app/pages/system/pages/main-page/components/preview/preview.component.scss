@@ -1,0 +1,168 @@
+.preview-empty {
+  margin-top: 30px;
+}
+
+.block-content {
+  .loader {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    img {
+      margin-top: 30%;
+    }
+  }
+}
+
+
+.notifications-paginator {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 40px;
+
+  /deep/ .ngx-pagination {
+    border-radius: 8px;
+    background-color: #fff;
+    margin: 0;
+    padding: 0;
+
+    li.current {
+      background-color: transparent;
+      span {
+        color: #109754;
+        font-weight: 500;
+        font-size: 20px;
+        font-family: 'Roboto', sans-serif;
+      }
+    }
+
+    li.pagination-previous.disabled::before {
+      display: none;
+      content: '';
+
+      background-color: red;
+      // opacity: 0;
+    }
+
+    li.pagination-next::after {
+      display: none;
+      content: '';
+      opacity: 0;
+      color: #fff;
+    }
+
+    .pagination-next {
+      position: relative;
+
+      a::after {
+        content: '';
+        background-image: url('../../../../../../../assets/ic_chevron_right.png');
+        height: 20px;
+        width: 20px;
+        display: block;
+        position: absolute;
+        right: 5px;
+        top: -12px;
+      }
+    }
+
+    .pagination-previous {
+      position: relative;
+
+      a::before {
+        content: '';
+        display: block;
+        height: 20px;
+        position: absolute;
+        bottom: -2px;
+        left: 5px;
+        width: 20px;
+        background-image: url('../../../../../../../assets/ic_chevron_left.png');
+      }
+
+    }
+
+    .pagination-next.disabled {
+      position: relative;
+
+      span {
+        display: none;
+      }
+
+      // span::after {
+      //   content: '';
+      //   background-image: url('../../../../../../../assets/ic_chevron_right.png');
+      //   height: 20px;
+      //   width: 20px;
+      //   display: block;
+      //   position: absolute;
+      //   right: 5px;
+      //   top: -12px;
+      // }
+    }
+
+    .pagination-previous {
+      position: relative;
+
+      a::before {
+        content: '';
+        display: block;
+        height: 20px;
+        position: absolute;
+        bottom: -2px;
+        left: 5px;
+        width: 20px;
+        background-image: url('../../../../../../../assets/ic_chevron_left.png');
+      }
+
+    }
+
+    .pagination-previous.disabled {
+      position: relative;
+
+      a {
+        display: block;
+        opacity: 1;
+      }
+
+      span {
+        display: none;
+      }
+
+      // span::before {
+      //   content: '';
+      //   display: block;
+      //   height: 20px;
+      //   position: absolute;
+      //   bottom: -2px;
+      //   left: 5px;
+      //   width: 20px;
+      //   background-image: url('../../../../../../../assets/ic_chevron_left.png');
+      // }
+    }
+
+    li:last-child {
+      margin-left: 5px;
+    }
+
+    li:first-child {
+      margin-right: 5px;
+    }
+
+    li {
+      transition: all .7s;
+      span {
+        font-size: 16px;
+        color: #109754;
+        font-family: 'Roboto', sans-serif;
+        font-weight: normal;
+      }
+
+      a:after, a:before {
+        display: none;
+        content: ''
+      }
+    }
+  }
+}

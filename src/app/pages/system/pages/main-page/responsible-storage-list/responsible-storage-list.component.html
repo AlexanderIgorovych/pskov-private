@@ -1,0 +1,88 @@
+
+    <div class="container notifications">
+      <mat-card class="block-paginated block">
+        <div class="search-block">
+          <mat-icon class='search-icon'>search</mat-icon>
+          <input (keyup)="handleFilter($event)" placeholder="Поиск по номеру паспорта/наименованию" class="search-input" type="text">
+        </div>
+        <div class="notifications-block">
+          <!-- <div class="notifications-filter">
+            <app-input-main>
+              <mat-icon>search</mat-icon>
+              <input
+                name="q"
+                placeholder="Поиск по номеру паспорта/наименованию"
+                type="text"
+              >
+            </app-input-main>
+          </div> -->
+          <div class="notifications-content">
+            <div class="loader">
+              <img *ngIf="ajaxLoader" src="assets/ajaxLoader.gif" alt="Loader">
+            </div>
+            <div *ngIf="!ajaxLoader" class="ajax-table">
+              <table *ngFor="let src of arrTotally | paginate : { id : 'responsive', currentPage : page, itemsPerPage : 1 }" mat-table [dataSource]="dataLoaded" class='notify-talbe'>
+                <ng-container [matColumnDef]="column.name" *ngFor="let column of displayedColumns">
+                  <th *matHeaderCellDef> {{column.name}} </th>
+                  <td *matCellDef="let element">
+                    {{ element[column.props] }}
+                    <button class='to-notification' *ngIf="element[column.props] === action">ПЕРЕЙТИ К ОФОРМЛЕНИЮ</button>
+                  </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+                <tr mat-row *matRowDef="let row; columns: columnsToDisplay; let i = index;"></tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </mat-card>
+
+      <div class="notifications-paginator paginator">
+         <pagination-controls
+            id="responsive"
+            maxSize="10"
+            directionLinks="true"
+            autoHide="true"
+            responsive="true"
+            previousLabel=""
+            nextLabel=""
+            screenReaderPaginationLabel="Pagination1"
+            screenReaderPageLabel="page"
+            (pageChange)="pageChangeHandler($event)">
+         </pagination-controls>
+      </div>
+
+      <!-- Table Controls -->
+
+      <div class="control-table-panel">
+        <p>ВСЕГО: {{ dataTotal }}</p>
+
+        <!-- fields control -->
+
+        <div class="amount-fields-control">
+
+          <p>КОЛИЧЕСТВО ПОЛЕЙ: </p>
+
+          <!-- <select name="fieldsAmount">
+            <option *ngFor="let element of fieldAmountValue" value="element.amount">
+              {{ element.amount }}
+            </option>
+          </select> -->
+
+          <form (click)="handleListShow()">
+            <input value="{{ amountValuePicked }}" type="text" [attr.disabled]="true">
+            <mat-icon *ngIf="isListShow" class='icon-dropdown'>
+              arrow_drop_up
+            </mat-icon>
+            <mat-icon *ngIf="!isListShow" class='icon-dropdown'>
+              arrow_drop_down
+           </mat-icon>
+          </form>
+          <ul *ngIf="isListShow" class="is-list-visible">
+            <li (click)="pickField($event)" *ngFor="let element of fieldAmountValue">
+              {{ element.amount }}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>

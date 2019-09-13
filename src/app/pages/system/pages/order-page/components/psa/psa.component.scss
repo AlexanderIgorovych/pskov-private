@@ -1,0 +1,135 @@
+$green : #109754;
+
+@mixin textStyle($size, $fw) {
+  padding: 0;
+  color: #293B5A;
+  font-family: 'Roboto', sans-serif;
+  font-size: $size;
+  margin-bottom: 0;
+  font-weight: $fw;
+}
+
+@mixin btnGreenBord {
+  padding: 0 16px;
+  height: 36px;
+  border: 1px solid $green;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: 'Roboto', sans-serif;
+  color: $green;
+  background-color: transparent;
+  transition: all .3s;
+}
+
+@mixin succBtn($mrgTop) {
+  height: 36px;
+  background-color: $green;
+  color: #fff;
+  font-size: 14px;
+  font-family: 'Roboto', sans-serif;
+  border-radius: 2px;
+  padding: 0 15px;
+  margin-top: $mrgTop;
+  border: none;
+}
+
+.container-psa-verify {
+  display: flex;
+  margin-right: 34px;
+  margin-top: 18px;
+
+  img {
+    width: 17px;
+    height: 13px;
+    margin-top: 12px;
+  }
+
+  p {
+    color: #2070CD;
+    font-size: 12px;
+    font-family: 'Roboto', sans-serif;
+    margin-left: 9px;
+  }
+}
+
+.psa-component {
+  max-width: 600px;
+  margin-left: 17px;
+  margin-top: 30px;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.verfy-button {
+  @include succBtn(41px);
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2), 0px 2px 2px rgba(0, 0, 0, 0.12), 0px 0px 2px rgba(0, 0, 0, 0.14);
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+button.verify-btn-end:disabled {
+  background-color: #CECDCD;
+}
+
+.order-docs-btn {
+  display: flex;
+  border-top: 1px solid #DBDBDB;
+  width: 100%;
+  justify-content: flex-end;
+
+  button {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2), 0px 2px 2px rgba(0, 0, 0, 0.12), 0px 0px 2px rgba(0, 0, 0, 0.14);
+    font-weight: 500;
+  }
+
+  button:not(:last-child) {
+    @include btnGreenBord
+    margin-right: 37px;
+    transition: all .2s;
+
+    &:hover {
+      background-color: $green;
+      color: #fff;
+    }
+  }
+
+  button.succ-submit:disabled {
+    background: #CECDCD;
+    color: #fff;
+  }
+
+  button.succ-submit {
+    @include succBtn(20)
+    margin-right: 30px;
+  }
+}
+
+.container-psa-verify.mobile {
+  display: none;
+}
+
+// @media (max-width: 680px) {
+//
+//   .btn-container {
+//     display: flex;
+//     flex-direction: column;
+//     align-items: flex-end;
+//
+//     button {
+//       width: 220px;
+//     }
+//   }
+//
+//   .container-psa-verify.mobile {
+//     display: flex;
+//   }
+//
+//   .container-psa-verify {
+//     display: none;
+//   }
+// }

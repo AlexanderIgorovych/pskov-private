@@ -1,0 +1,149 @@
+<div class="order add-partner">
+  <mat-toolbar class="order-header">
+    <div class="container order-header-body">
+      <button mat-icon-button>
+        <mat-icon
+          [routerLink]="['/system/order']"
+          aria-label="Example icon-button with a heart icon"
+          >arrow_back</mat-icon
+        >
+      </button>
+      <span class="order-title">Добавление контрагента</span>
+    </div>
+  </mat-toolbar>
+
+  <div class="block">
+    <div class="container">
+      <mat-card class="block-order">
+        <mat-horizontal-stepper #partnerStepper class="stepper">
+          <mat-step label="Тип контрагента/информация">
+            <div class="creator">
+              <div class="creator-content">
+                <div class="creator-block">
+                  <div class="creator-block-label">
+                    <span>ВЫБЕРИТЕ ТИП КОНТРАГЕНТА</span>
+                  </div>
+                  <div class="row">
+                    <button
+                      mat-raised-button
+                      class="button button-card"
+                      [ngClass]="{ active: partnerType === 0 }"
+                      (click)="onPartnerTypeSelect(0)"
+                    >
+                      ФИЗЛИЦО
+                    </button>
+                    <button
+                      mat-raised-button
+                      class="button button-card"
+                      [ngClass]="{ active: partnerType === 1 }"
+                      (click)="onPartnerTypeSelect(1)"
+                    >
+                      ЮРЛИЦО
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <form
+                [formGroup]="form1"
+                #form_human
+                class="creator-block"
+                *ngIf="partnerType === 0"
+              >
+                <div class="creator-block-content">
+                  <div class="creator-block-label">
+                    <span>УКАЖИТЕ ФИО КОНТРАГЕНТА</span>
+                  </div>
+                  <div class="input">
+                    <div class="input-content">
+                      <input
+                        type="text"
+                        placeholder="Фамилия, имя, отчество"
+                        formControlName="name"
+                      />
+                      <mat-icon class="input-icon">cancel</mat-icon>
+                    </div>
+                    <div class="input-error">
+                      <span>Слишком короткий номер</span>
+                    </div>
+                  </div>
+                  <div class="creator-block-label">
+                    <span>УКАЖИТЕ НОМЕР И СЕРИЮ ПАСПОРТА*</span>
+                  </div>
+                  <div class="input">
+                    <div class="input-content">
+                      <input
+                        type="text"
+                        placeholder="Должен содержать 10-12 знаков"
+                        formControlName="identifier"
+                      />
+                      <mat-icon class="input-icon">cancel</mat-icon>
+                    </div>
+                    <div class="input-error">
+                      <span>Слишком короткий номер</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="creator-block-footer row">
+                  <button
+                    mat-flat-button
+                    disabled
+                    class="button button-primary"
+                    type="submit"
+                  >
+                    СЛЕДУЮЩИЙ ШАГ
+                  </button>
+                </div>
+              </form>
+
+              <div class="creator-block" *ngIf="partnerType === 1">
+                <div class="creator-block-content">
+                  <div class="creator-block-label">
+                    <span>УКАЖИТЕ НАИМЕНОВАНИЕ ЮРЛИЦА</span>
+                  </div>
+                  <div class="input">
+                    <div class="input-content">
+                      <input
+                        type="text"
+                        placeholder="Наименование не указано"
+                      />
+                      <mat-icon class="input-icon">cancel</mat-icon>
+                    </div>
+                    <div class="input-error">
+                      <span>Слишком короткий номер</span>
+                    </div>
+                  </div>
+                  <div class="creator-block-label">
+                    <span>УКАЖИТЕ НОМЕР ИНН*</span>
+                  </div>
+                  <div class="input">
+                    <div class="input-content">
+                      <input
+                        type="text"
+                        placeholder="Должен содержать n символов"
+                      />
+                      <mat-icon class="input-icon">cancel</mat-icon>
+                    </div>
+                    <div class="input-error">
+                      <span>Слишком короткий номер</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="creator-block-footer row">
+                  <button
+                    mat-flat-button
+                    disabled
+                    class="button button-primary"
+                  >
+                    СЛЕДУЮЩИЙ ШАГ
+                  </button>
+                </div>
+              </div>
+            </div>
+          </mat-step>
+          <mat-step label="Номер телефона"></mat-step>
+        </mat-horizontal-stepper>
+      </mat-card>
+    </div>
+  </div>
+</div>
