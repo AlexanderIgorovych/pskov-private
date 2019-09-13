@@ -1,0 +1,330 @@
+
+<div class="modal-stepper">
+  <mat-horizontal-stepper #partnerStepper class="stepper" [linear]="isLinear">
+    <mat-step label="Тип контрагента/информация" [stepControl]="form1">
+      <div class="creator">
+
+        <div class="picker-partner">
+          <app-type-picker
+            class='picker'
+            [title]="tabTitle"
+            [tabs]="tabs"
+            (pick)="onPartnerTypeSelect($event)"
+          ></app-type-picker>
+        </div>
+
+      <div class="container-wrapper-add-partner">
+        <form
+          [formGroup]="form1"
+          #form_human
+          class="creator-block"
+          *ngIf="partnerType === 0"
+        >
+          <div class="creator-block-content">
+            <div class="creator-block-label">
+              <span>УКАЖИТЕ ФИО КОНТРАГЕНТА</span>
+            </div>
+
+            <div appFocus class="input">
+              <div class="input-content">
+                <input
+                  type="text"
+                  (keyup)="restoreNewPartner()"
+                  placeholder="Фамилия, имя, отчество"
+                  formControlName="name"
+                />
+                <mat-icon
+                  *ngIf="form1Name?.value?.length"
+                  class="input-icon"
+                  (click)="form1Name.reset()"
+                  >cancel</mat-icon
+                >
+              </div>
+              <div
+                *ngIf="form1Name.touched && !!form1Name?.errors?.required && errorMess"
+                class="input-error"
+              >
+                <span>Обязательное поле</span>
+              </div>
+              <div
+                *ngIf="form1Name.touched && !!form1Name?.errors?.maxlength"
+                class="input-error"
+              >
+                <span>Слишком длинное имя</span>
+              </div>
+            </div>
+
+            <div class="creator-block-label">
+              <span>УКАЖИТЕ НОМЕР И СЕРИЮ ПАСПОРТА*</span>
+            </div>
+
+            <div class="input">
+              <div class="input-content">
+                <input
+                  (keyup)="restoreNewPartner()"
+                  type="text"
+                  placeholder="Должен содержать 8-10 знаков"
+                  formControlName="identifier"
+                />
+                <mat-icon
+                  *ngIf="form1Identifier?.value?.length"
+                  class="input-icon"
+                  (click)="form1Identifier.reset()"
+                  >cancel</mat-icon
+                >
+              </div>
+              <!-- <div
+                *ngIf="
+                  !form1Identifier?.errors?.minlength &&
+                  !form1Identifier?.errors?.maxlength &&
+                  form1Identifier.touched &&
+                  form1Identifier?.errors &&
+                  (!!form1Identifier?.errors?.pattern ||
+                    !!form1Identifier?.errors?.required)
+                "
+                class="input-error"
+              >
+                <span>Слишком длинный номер</span>
+              </div> -->
+
+              <div *ngIf="errorMess" class="error-section-timeout">
+
+                <div
+                  *ngIf="
+                    form1Identifier.touched &&
+                    form1Identifier?.errors &&
+                    !form1Identifier?.errors?.maxlength &&
+                    !form1Identifier?.errors?.minlength &&
+                    form1Identifier?.errors?.pattern
+                  "
+                  class="input-error"
+                >
+                  <span>Введенное значение не соответствует формату</span>
+                </div>
+
+                <div
+                  *ngIf="
+                    form1Identifier.touched &&
+                    form1Identifier?.errors &&
+                    !!form1Identifier?.errors?.maxlength
+                  "
+                  class="input-error"
+                >
+                  <span>Слишком длинный номер</span>
+                </div>
+                <div
+                  *ngIf="
+                    form1Identifier.touched &&
+                    form1Identifier?.errors &&
+                    !!form1Identifier?.errors?.minlength
+                  "
+                  class="input-error"
+                >
+                  <span>Слишком короткий номер</span>
+                </div>
+                <div
+                  *ngIf="
+                    form1Identifier.touched &&
+                    form1Identifier?.errors &&
+                    !!form1Identifier?.errors?.async
+                  "
+                  class="input-error"
+                >
+                  <span>Данный контрагент уже имеется в базе</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="creator-block-footer row">
+            <button
+              (click)="onSubmitFirstForm(partnerStepper)"
+              mat-flat-button
+              [disabled]="form1.invalid"
+              class="button button-primary partnNextBtn"
+              color="none"
+            >
+              СЛЕДУЮЩИЙ ШАГ
+            </button>
+          </div>
+        </form>
+
+        <form
+          [formGroup]="form1"
+          class="creator-block"
+          *ngIf="partnerType === 1"
+        >
+          <div class="creator-block-content">
+            <div class="creator-block-label">
+              <span>УКАЖИТЕ НАИМЕНОВАНИЕ ЮРЛИЦА</span>
+            </div>
+
+            <div class="input">
+              <div class="input-content">
+                <input
+                  (keyup)="restoreNewPartner()"
+                  type="text"
+                  placeholder="Наименование не указано"
+                  formControlName="name"
+                />
+                <mat-icon
+                  *ngIf="form1Name?.value?.length"
+                  class="input-icon"
+                  (click)="form1Name.reset()"
+                  >cancel</mat-icon
+                >
+              </div>
+              <div
+                class="input-error"
+                *ngIf="form1Name.touched && !!form1Name?.errors?.required"
+              >
+                <span>Укажите наименование юр.лица</span>
+              </div>
+              <div
+                *ngIf="form1Name.touched && !!form1Name?.errors?.maxlength"
+                class="input-error"
+              >
+                <span>Слишком длинное имя</span>
+              </div>
+            </div>
+
+            <div class="creator-block-label">
+              <span>УКАЖИТЕ НОМЕР ИНН</span>
+            </div>
+
+            <div class="input">
+              <div class="input-content">
+                  <input
+                    class="desktop-block-content"
+                    (keyup)="restoreNewPartner()"
+                    type="text"
+                    placeholder="Должен содержать 12 символов"
+                    formControlName="identifier"
+                  />
+                  <input
+                    class="mobile-phone-block"
+                    (keyup)="restoreNewPartner()"
+                    type="text"
+                    placeholder="Должен содержать 12 симв."
+                    formControlName="identifier"
+                  />
+                <mat-icon
+                  *ngIf="form1Identifier?.value?.length"
+                  class="input-icon"
+                  (click)="form1Identifier.reset()"
+                  >cancel</mat-icon
+                >
+              </div>
+
+
+              <div *ngIf="errorMess" class="error-section-timeout">
+
+                <div
+                  *ngIf="
+                    form1Identifier.touched &&
+                    form1Identifier?.errors &&
+                    (!!form1Identifier?.errors?.pattern ||
+                      !!form1Identifier?.errors?.required)
+                  "
+                  class="input-error"
+                >
+                  <span>Номер должен содержать 12 знаков</span>
+                </div>
+                <!-- <div
+                  *ngIf="
+                    form1Identifier.touched &&
+                    form1Identifier?.errors &&
+                    !!form1Identifier?.errors?.maxlength
+                  "
+                  class="input-error"
+                >
+                  <span>Слишком длинный номер</span>
+                </div>
+                <div
+                  *ngIf="
+                    form1Identifier.touched &&
+                    form1Identifier?.errors &&
+                    !!form1Identifier?.errors?.minlength
+                  "
+                  class="input-error"
+                >
+                  <span>Слишком короткий номер</span>
+                </div> -->
+                <div
+                  *ngIf="
+                    form1Identifier.touched &&
+                    form1Identifier?.errors &&
+                    !!form1Identifier?.errors?.async
+                  "
+                  class="input-error"
+                >
+                  <span>Данный контрагент уже имеется в базе</span>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+          <div class="creator-block-footer row">
+            <button
+              (click)="onSubmitFirstForm()"
+              mat-flat-button
+              [disabled]="form1.invalid"
+              class="button button-primary partnNextBtn"
+              color="none"
+            >
+              СЛЕДУЮЩИЙ ШАГ
+            </button>
+          </div>
+        </form>
+      </div>
+
+      </div>
+    </mat-step>
+    <mat-step label="Номер телефона">
+      <app-confirm-edit
+        [isPartnerExist]="partnerExistValue"
+        [numberForm]="numberForm"
+        [isAttemptFailed]="isFailedAttemted"
+        [codeConfirm]="isCodeConfirmed | async"
+        [partnerType]="partnerType"
+        [partner]="partner"
+        [timeAfterTimerDie]="timeAfterTimerDie"
+        (restoreVerified)="restoreVerifiedState()"
+        (sendCodeToClientPhone)="onSendCodeToClientPhone()"
+        (destroyed)="restoreSecondState()"
+      ></app-confirm-edit>
+    </mat-step>
+  </mat-horizontal-stepper>
+  <div class="modal-stepper-footer row">
+    <button
+      mat-flat-button
+      color="none"
+      class="button button-bordered"
+      (click)="onNoClick()"
+    >
+      ОТМЕНИТЬ
+    </button>
+    <button
+      mat-flat-button
+      color="none"
+      class="button button-primary partnNextBtn"
+      (click)="prefillFirstStepWithNewPartner()"
+      [disabled]="
+        (isCodeConfirmed  | async) && phoneCodeField?.valid ? false : true ||
+        isPhoneConfirmed && partnerType === 1
+      "
+    >
+      ПРОДОЛЖИТЬ
+    </button>
+  </div>
+  <button
+    class="back-step"
+    (click)="previousStep()"
+    *ngIf="stepper.selectedIndex && !(isCodeConfirmed | async)"
+  >
+    <img src="assets/Shapeback.png" alt="" /> <span>Назад</span>
+  </button>
+</div>

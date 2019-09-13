@@ -1,0 +1,103 @@
+.partnNextBtn {
+  margin-bottom: 20px;
+}
+
+
+@media (min-width : 320px) and (max-width : 568px) {
+
+  .back-step {
+    margin-top: 30px;
+    bottom: -10px;
+    left: -50px;
+  }
+
+  ::ng-deep .picker-partner .creator-block-label {
+    font-size: 13px;
+    text-align: left;
+    word-wrap: normal;
+  }
+
+  .creator-block-label {
+    font-size: 13px;
+  }
+
+  .container-wrapper-add-partner {
+    width: 290px;
+    padding: 0;
+    margin: 0;
+
+    .creator-block {
+      min-width: 260px;
+    }
+
+    .creator-block-footer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+
+      font-size: 12px;
+    }
+  }
+
+  .modal-stepper-footer {
+    padding: 10px 15px;
+    justify-content: center;
+
+    button {
+      width: 110px;
+      font-size: 12px;
+    }
+    margin-bottom: 20px;
+  }
+}
+
+@media (min-width: 321px) and (max-width: 700px){
+
+  .creator-block-label {
+    font-size: 14px;
+  }
+
+  .creator {
+    margin-top: 15px;
+  }
+
+  .container-wrapper-add-partner {
+    width: 320px;
+    padding: 0;
+    padding-top: 10px;
+    margin: 0;
+
+    .creator-block {
+      min-width: 290px;
+    }
+
+    .creator-block-footer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    div.creator-block-content {
+      width: 250px;
+      margin-left: 0;
+    }
+  }
+
+  .modal-stepper-footer {
+    padding: 10px 15px;
+    justify-content: center;
+    margin-bottom: 20px;
+
+    button {
+      width: 130px;
+    }
+  }
+
+  .back-step {
+    margin-top: 20px;
+    bottom: 0;
+    left: -50px;
+  }
+}

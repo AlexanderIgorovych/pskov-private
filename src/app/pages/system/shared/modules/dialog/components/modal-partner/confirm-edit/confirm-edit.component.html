@@ -1,0 +1,270 @@
+<div class="creator">
+
+  <div class="wrapper-confirm-edit">
+    <div class="creator-content">
+      <form
+        [formGroup]="numberForm"
+        class="creator-block"
+        *ngIf="partnerType === 0 && !partner.phone_number"
+      >
+        <div class="creator-block-content">
+          <div class="creator-block-label">
+            <span>УКАЖИТЕ НОМЕР ТЕЛЕФОНА КОНТРАГЕНТА</span>
+          </div>
+
+          <div class="input">
+            <div class="input-content">
+
+              <label for="conuntryInput" class="country-code">+7</label>
+
+              <input
+                id="conuntryInput"
+                class="country-code__input"
+                formControlName="phone"
+                type="text"
+                placeholder="0689730257"
+                (keyup)="restoreVerifiedState()"
+              />
+              <mat-icon
+                *ngIf="userNumber?.value?.length"
+                class="input-icon"
+                (click)="userNumber.reset()"
+                >cancel</mat-icon
+              >
+            </div>
+
+            <span class="input-error" *ngIf="isExist">
+              Данный номер уже существует
+            </span>
+            <span class="input-error" *ngIf="isPartnerExist">
+              Контрагент с такими данными уже существует
+            </span>
+            <div
+              *ngIf="userNumber.touched && userNumber.invalid"
+              class="input-error"
+            >
+              <span *ngIf="!!userNumber?.errors?.required"
+                >Слишком короткий номер</span
+              >
+              <!-- <span *ngIf="!!userNumber?.errors?.pattern && userNumber.dirty"
+                >Неправильный формат</span
+              > -->
+              <span *ngIf="!!userNumber?.errors?.async && userNumber.dirty"
+                >Данный номер уже имеется в базе</span
+              >
+            </div>
+            <div
+              *ngIf="
+                userNumber.touched &&
+                userNumber?.errors &&
+                !!userNumber?.errors?.maxlength
+              "
+              class="input-error"
+            >
+              <span>Слишком длинный номер</span>
+            </div>
+            <div
+              *ngIf="
+                userNumber.touched &&
+                userNumber?.errors &&
+                !!userNumber?.errors?.minlength
+              "
+              class="input-error"
+            >
+              <span>Слишком короткий номер</span>
+            </div>
+          </div>
+        </div>
+        <div class="creator-block-footer row">
+          <button
+            mat-flat-button
+            class="button button-primary send-code-to"
+            type="submit"
+            color="none"
+            [disabled]="numberForm.invalid"
+            (click)="onSendCodeToClientPhone()"
+          >
+            ОТПРАВИТЬ КОД НА НОМЕР
+          </button>
+        </div>
+      </form>
+
+      <form
+        [formGroup]="numberForm"
+        class="creator-block"
+        *ngIf="partnerType === 1"
+      >
+        <div class="creator-block-content">
+          <div class="creator-block-label">
+            <span>УКАЖИТЕ НОМЕР ТЕЛЕФОНА КОНТРАГЕНТА</span>
+          </div>
+
+          <div class="input">
+            <div class="input-content">
+              <label for="contryCodeInp" class="country-code">+7</label>
+
+              <input
+                class="country-code__input"
+                id="contryCodeInp"
+                formControlName="phone"
+                type="text"
+                placeholder="0689730257"
+                (keyup)="restoreVerifiedState()"
+              />
+              <mat-icon
+                *ngIf="userNumber?.value?.length"
+                class="input-icon"
+                (click)="userNumber.reset()"
+                >cancel</mat-icon
+              >
+            </div>
+
+            <span class="input-error" *ngIf="isExist">
+              Данный номер уже существует
+            </span>
+            <span class="input-error" *ngIf="isPartnerExist">
+              Контрагент с такими данными уже существует
+            </span>
+            <div
+              *ngIf="userNumber.touched && userNumber.invalid"
+              class="input-error"
+            >
+              <span *ngIf="!!userNumber?.errors?.required"
+                >Слишком короткий номер</span
+              >
+              <!-- <span *ngIf="!!userNumber?.errors?.pattern && userNumber.dirty"
+                >Неправильный формат</span
+              > -->
+              <span *ngIf="!!userNumber?.errors?.async && userNumber.dirty"
+                >Данный номер уже имеется в базе</span
+              >
+            </div>
+            <div
+              *ngIf="
+                userNumber.touched &&
+                userNumber?.errors &&
+                !!userNumber?.errors?.maxlength
+              "
+              class="input-error"
+            >
+              <span>Слишком длинный номер</span>
+            </div>
+            <div
+              *ngIf="
+                userNumber.touched &&
+                userNumber?.errors &&
+                !!userNumber?.errors?.minlength
+              "
+              class="input-error"
+            >
+              <span>Слишком короткий номер</span>
+            </div>
+          </div>
+        </div>
+        <div class="creator-block-footer row">
+          <button
+            mat-flat-button
+            class="button button-primary send-code-to"
+            type="submit"
+            color="none"
+            [disabled]="numberForm.invalid"
+            (click)="onSendCodeToClientPhone()"
+          >
+            ОТПРАВИТЬ ОПЕРАТОРУ
+          </button>
+        </div>
+      </form>
+      <!-- TIMER COMPONENT -->
+      <form
+        class="creator-block"
+        *ngIf="partnerType === 0 && partner.phone_number"
+      >
+        <div class="creator-block-content">
+          <div class="creator-block-label">
+            <span>ПОДТВЕРДИТЕ НОМЕР ТЕЛЕФОНА КОНТРАГЕНТА</span>
+          </div>
+          <div class="creator-block-subtitle">
+            <span>Код был отправлен на указанный номер:</span>
+          </div>
+          <form [formGroup]="numberForm">
+            <div class="input">
+              <div class="input-content">
+                <div class="country-code">+7</div>
+                <input
+                  class="country-code__input"
+                  type="text"
+                  [readonly]="true"
+                  formControlName="phone"
+                  placeholder="0689730257"
+                />
+                <button class="input-button" (click)="openConfirmEdit()">
+
+                  <span class='default-style-class'>ИЗМЕНИТЬ НОМЕР</span>
+                  <span class='mobile-style-class'>ИЗМ. НОМЕР</span>
+                </button>
+              </div>
+            </div>
+            <div class="creator-block-label">
+              <span>Введите полученный код</span>
+            </div>
+            <div class="input input-short">
+              <div class="row creator-block-timer">
+                <div class="input-content">
+                  <input
+                    type="text"
+                    [readOnly]="codeConfirm || isAttemptFailed"
+                    formControlName="code"
+                    placeholder="1234"
+                  />
+                </div>
+                <div class="creator-block-subtitle">
+                  <span>{{ timeAfterTimerDie | date: 'mm:ss' }}</span>
+                </div>
+                <div>
+                  <button
+                    class="button button-transparent"
+                    type="submit"
+                    [disabled]="timeAfterTimerDie || codeConfirm === true"
+                    color="none"
+                    (click)="onSendCodeToClientPhone()"
+                  >
+                    ОТПРАВИТЬ КОД ПОВТОРНО
+                  </button>
+                </div>
+              </div>
+              <div
+                class="input-error"
+              >
+                <span
+                  *ngIf="!isCodeConfirmed && !isAttemptFailed && phoneCodeField.dirty && phoneCodeField.value !== '' && phoneCodeField.touched  && codeConfirm !== true">
+                  Неверный код. Повторите попытку по истечению времени
+                </span>
+                <span *ngIf="isAttemptFailed && !isCodeConfirmed">
+                  Неверный код. Подтвердите вручную через 1С
+                </span>
+
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="creator-block-footer row">
+          <div class="confirmed-caption" *ngIf="codeConfirm === true">
+            <img src="assets/confirm-phone.png" alt="Number verified success" /> Номер телефона
+            подтвержден
+            <!-- Запрос отправлен. <br />
+            Нажмите кнопку "Продолжить" -->
+          </div>
+          <button
+            mat-flat-button
+            class="button button-primary succ-onec"
+            type="submit"
+            color="none"
+            [disabled]="!isAttemptFailed"
+          >
+            ПОДТВЕРДИТЬ ЧЕРЕЗ 1C
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

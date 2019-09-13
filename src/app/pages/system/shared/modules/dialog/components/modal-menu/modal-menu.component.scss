@@ -1,0 +1,51 @@
+@media only screen and (max-width : 320px) {
+
+  .modal-header-title {
+    font-size: 14px;
+  }
+
+  .modal-menu-buttons {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .modal-menu-title {
+    font-size: 14px;
+  }
+
+  .modal-menu-item__label {
+    font-size: 13px;
+  }
+
+  .modal-menu-buttons {
+    ::ng-deep .mat-raised-button {
+      width: 200px;
+      margin-left: 0;
+      padding: 13px 10px;
+      display: flex;
+      justify-content: center;
+      text-align: center;
+      margin-right: 0;
+    }
+  }
+
+  .modal-menu-buttons-item span {
+    font-size: 12px;
+  }
+
+  .modal-menu-item:last-child {
+    margin-bottom: 30px;
+  }
+
+}
+
+@media (min-width: 321px) and (max-width: 680px){
+  .modal-header-title {
+    font-size: 18px;
+  }
+
+  .modal-menu-item:last-child {
+    margin-bottom: 40px;
+    outline: 1px solid red;
+  }
+}

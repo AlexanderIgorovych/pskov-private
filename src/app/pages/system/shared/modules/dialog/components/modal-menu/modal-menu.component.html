@@ -1,0 +1,39 @@
+<mat-toolbar class="modal-header">
+  <div class="modal-header-title">НОВОЕ ВЗВЕШИВАНИЕ</div>
+  <div class="modal-header-buttons">
+    <button mat-button (click)="onClose(null)">ОТМЕНА</button>
+  </div>
+</mat-toolbar>
+<div class="modal">
+  <div class="modal-menu">
+    <div class="modal-menu-title">ВЫБЕРИТЕ ТИП ВЗВЕШИВАНИЯ</div>
+    <div class="modal-menu-item" *ngFor="let item of menuItems">
+      <!-- <a [routerLink]="['/system/inverory']">0</a> -->
+      <button
+        mat-raised-button
+        class="modal-menu-item__content"
+        *ngIf="item.type !== undefined"
+        (click)="onMenuItemClick(item.type)"
+      >
+        <div class="modal-menu-item__label">{{ item.label }}</div>
+        <mat-icon>chevron_right</mat-icon>
+      </button>
+      <div
+        class="modal-menu-item__content modal-menu-item__sub"
+        *ngIf="!item.hasOwnProperty('type')"
+      >
+        <div class="modal-menu-item__label">{{ item.label }}</div>
+        <div class="modal-menu-buttons">
+          <button
+            mat-raised-button
+            class="modal-menu-buttons-item"
+            *ngFor="let button of item.subitems"
+            (click)="onMenuItemClick(button.type)"
+          >
+            <span>{{ button.label }}</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
