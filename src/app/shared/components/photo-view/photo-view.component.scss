@@ -1,0 +1,20 @@
+.photo-view-container,
+.outer-wrapper {
+  position: relative;
+}
+.close-btn {
+  background: none;
+  border: none;
+  position: absolute;
+  right: 0;
+  color: #109754;
+  z-index: 1;
+}
+
+.cdk-global-overlay-wrapper .mat-dialog-container {
+  width: 100%;
+}
+
+img {
+  max-width: 100%;
+}

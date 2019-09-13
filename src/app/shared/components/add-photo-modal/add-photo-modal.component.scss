@@ -1,0 +1,14 @@
+.action-row {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.hidden {
+  visibility: hidden;
+  position: absolute;
+}
+
+.cancel {
+  margin-right: auto;
+}

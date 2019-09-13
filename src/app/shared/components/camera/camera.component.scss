@@ -1,0 +1,49 @@
+$green : #109754;
+
+.hidden-canvas {
+  visibility: hidden;
+  position: absolute;
+}
+
+.camera-not-found {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  text-transform: uppercase;
+  padding-top: 70px;
+  font-weight: 500;
+  color: #293B5A;
+}
+
+.controls {
+  display: flex;
+  margin-top: 20px;
+
+  button.decline-photo {
+    margin-right: 10px;
+    padding: 0 16px;
+    height: 36px;
+    border: 1px solid $green;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: 'Roboto', sans-serif;
+    color: $green;
+    background-color: transparent;
+    transition: all .3s;
+  }
+
+  button {
+    border: none;
+    background-color: $green;
+    border-radius: 2px;
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    height: 36px;
+    width: 180px;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2), 0px 2px 2px rgba(0, 0, 0, 0.12), 0px 0px 2px rgba(0, 0, 0, 0.14);
+    color: #fff;
+  }
+}

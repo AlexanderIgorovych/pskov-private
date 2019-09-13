@@ -1,0 +1,17 @@
+<div class="modal">
+  <span class='camera-not-found' *ngIf="cameraStatus === false"><p>Камера не найдена</p></span>
+  <div class="display">
+    <video *ngIf="state === 0" #video></video>
+    <img *ngIf="photo" [attr.src]="photo.img" #image />
+    <canvas class="hidden-canvas" #canvas></canvas>
+  </div>
+  <div class="controls" *ngIf="cameraStatus">
+    <button (click)="makePhoto()" mat-button *ngIf="state === 0">Снять</button>
+    <button class='decline-photo' (click)="reCapture()" mat-button *ngIf="state === 1">
+      Переснять
+    </button>
+    <button (click)="savePhoto()" mat-button *ngIf="state === 1">
+      Сохранить
+    </button>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+<div class="docs">
+  <div class="docs-header row">
+    <div class="creator-block-label">
+      <span class="upper" [innerHTML]="title"></span>
+    </div>
+    <button
+      (click)="openDialog()"
+      mat-flat-button
+      class="button button-bordered"
+      type="submit"
+      color="none"
+    >
+      ВЫБРАТЬ ФОТО
+    </button>
+  </div>
+  <div class="docs-content">
+    <div [ngClass]="{ 'empty' : textContent.length < 5 }" class='text-content'><p [innerHTML]="textContent"></p></div>
+    <div
+      class="docs-item shadow-hover"
+      *ngFor="let file of files; let i = index"
+    >
+      <div (click)="invokeDocumentView(file.url)">
+        <img [src]="file.url" alt="" class="docs-item-image" />
+        <div class="docs-item-tools row">
+          <div class="docs-item-title">{{ file.name }}</div>
+          <button mat-icon-button (click)="onDocumentDelete(i)">
+            <mat-icon aria-label="Example icon-button with a heart icon"
+              >delete</mat-icon
+            >
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

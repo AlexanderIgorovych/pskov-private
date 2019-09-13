@@ -1,0 +1,14 @@
+<div class="wrapper">
+  <app-offline-tab *ngIf="(online | async) === false"></app-offline-tab>
+
+  <app-side-menu (closeMenu)="sideOpenMenu()" [classValue]="sideMenu"></app-side-menu>
+  <app-backdrop (handleBackDrop)="sideOpenMenu()" [backdropActive]='sideMenu'></app-backdrop>
+  <div class="wrapper-header">
+    <app-header [menuBack]='sideMenu' (headerSwitch)='sideOpenMenu()'></app-header>
+  </div>
+
+
+  <div class="wrapper-content">
+    <router-outlet></router-outlet>
+  </div>
+</div>

@@ -1,0 +1,37 @@
+<div class="modal modal-logout">
+  <ng-container *ngTemplateOutlet="targetTemplate"></ng-container>
+</div>
+
+<ng-template #pickTool>
+  <div class="modal-text">
+    <h2 mat-dialog-title>Выберите способ добавления фото:</h2>
+  </div>
+  <div mat-dialog-actions class="modal-actions">
+    <div class="action-row">
+      <button mat-button (click)="takeCameraPhoto()" cdkFocusInitial>
+        СДЕЛАТЬ ФОТО
+      </button>
+    </div>
+    <div class="action-row">
+      <button class="cancel" mat-button (click)="cancel()">ОТМЕНИТЬ</button>
+      <input
+        class="hidden"
+        accept="image/jpeg,image/png"
+        (change)="takeGaleryPhoto($event)"
+        type="file"
+        #fileInput
+        id="file"
+      />
+      <label for="file">
+        <button (click)="fileInput.click()" mat-button cdkFocusInitial>
+          ДОБАВИТЬ ИЗ ГАЛЕРЕИ
+        </button>
+      </label>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #camera>
+  <img (click)="setTemplate(pickTool)" src="assets/Shape.svg" alt="" />
+  <app-camera (captured)="capturePhoto($event)"></app-camera>
+</ng-template>

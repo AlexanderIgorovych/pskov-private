@@ -1,0 +1,40 @@
+<div class="input">
+  <div
+    class="input-content"
+    [ngClass]="{
+      'open-input': isListVisible,
+      'active-border': isInputFocused,
+      'error-border': formControlData.touched && formControlData.errors
+    }"
+  >
+    <input
+      (focus)="setInputFocus(true)"
+      (blur)="setInputFocus(false)"
+      class="input__field"
+      (keyup)="emitChanges()"
+      type="text"
+      [attr.placeholder]="placeholder"
+      [formControl]="formControlData"
+    />
+    <mat-icon
+      *ngIf="formControlData?.value?.length"
+      (click)="clearInput()"
+      class="input-icon"
+      >cancel
+    </mat-icon
+    >
+    <ng-content select="[input-control]"></ng-content>
+  </div>
+  <ul *ngIf="isListVisible" class="c-autosuggest__list active-border">
+    <li
+      class="c-autosuggest__item"
+      *ngFor="let item of data"
+      (click)="pickedSuggestion(item)"
+    >
+      {{ item?.title }}
+    </li>
+  </ul>
+  <div *ngIf="formControlData.errors">
+    <ng-content select="[error]"> </ng-content>
+  </div>
+</div>

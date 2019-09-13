@@ -1,0 +1,47 @@
+<div class="photo-client-card">
+  <div class="photo-container">
+    <app-section-card>
+      <span title>ДОБАВЛЕНИЕ КАРТЫ В СИСТЕМУ</span>
+      <ng-container body>
+        <ng-container *ngFor="let card of photos; let i = index">
+            <div class='card-{{i}}'>
+              <app-add-photo
+                [nameType]="card.key"
+                [files]="card.data"
+                (photoPicked)="addPhoto(i, $event)"
+                (photoDeleted)="deletePhoto(i, $event)"
+                [title]="card.title"
+              ></app-add-photo>
+            </div>
+          <mat-divider></mat-divider>
+        </ng-container>
+        <div class="creator-block-footer row">
+          <button (click)="onHandleBack()" class="cancel-button">ОТМЕНА</button>
+          <button
+            [disabled]="!arePhotosFilled || isClientReady || isExistError"
+            (click)="sendRequest()"
+            mat-flat-button
+            class="button button-primary"
+            type="submit"
+            color="none"
+          >
+            ОТПРАВИТЬ ОПЕРАТОРУ
+          </button>
+        </div>
+      </ng-container>
+    </app-section-card>
+  </div>
+</div>
+<div class="alert-section">
+  <div class="alerts-handler">
+    <div class="succes-block" *ngIf="isExistError">
+      <span class='input-error-section-alert'>Не разрешено создатавать более 5-ти карт</span>
+    </div>
+    <div class='succes-block' *ngIf="isClientReady">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.00016 16.1701L4.83016 12.0001L3.41016 13.4101L9.00016 19.0001L21.0002 7.00009L19.5902 5.59009L9.00016 16.1701Z" fill="#2070CD"/>
+      </svg>
+      <p>Реквизиты карты отправлены оператору. Дождитесь печати ПСА.</p>
+    </div>
+  </div>
+</div>
