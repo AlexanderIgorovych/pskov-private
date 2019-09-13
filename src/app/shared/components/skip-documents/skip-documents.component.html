@@ -1,0 +1,20 @@
+<div class="modal modal-logout">
+  <div class="modal-text">
+    <h2 mat-dialog-title>Вы уверены, что хотите пропустить данный шаг?</h2>
+    <p mat-dialog-content class="text modal-parapraph">
+      Если вы пропустите данный шаг, груз будет автоматически поставлен на
+      ответственное хранение. Процедуру оформления ПСА в таком случае можно
+      будет продолжить в разделе «Ответственное хранение» на главной странице.
+    </p>
+  </div>
+  <div mat-dialog-actions class="modal-actions">
+    <div class="action-row">
+      <button (click)="onCancel()" mat-button cdkFocusInitial>ОТМЕНА</button>
+    </div>
+    <div class="action-row">
+      <button (click)="onSkip()" class="cancel" mat-button>
+        ПРОПУСТИТЬ ШАГ
+      </button>
+    </div>
+  </div>
+</div>

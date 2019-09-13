@@ -1,0 +1,23 @@
+@import '~scss/partials';
+
+.c-card {
+  &__header {
+    padding: 24px;
+
+    background: $salem;
+    color: #ffffff;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    font-size: 16px;
+  }
+  &__body {
+    padding: 24px;
+  }
+}
+
+mat-card.c-card {
+  padding: 0;
+  box-shadow: none;
+}

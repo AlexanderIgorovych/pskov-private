@@ -1,0 +1,18 @@
+<div class="creator-block creator-block-content">
+  <div class="creator-block-label">
+    <span>{{ title }}</span>
+  </div>
+  <div class="row car-tab-row tabs-comp">
+    <ng-container *ngFor="let tab of tabs; let i = index">
+      <button
+        [disabled]="tab.disable"
+        mat-raised-button
+        class="button button-card"
+        [ngClass]="{ active: pickedType === i }"
+        (click)="pickType(i)"
+      >
+        {{ tab.title }}
+      </button>
+    </ng-container>
+  </div>
+</div>
