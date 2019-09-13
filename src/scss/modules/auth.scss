@@ -1,0 +1,41 @@
+.auth {
+  width: 100vw;
+  height: 100vh;
+  background: url("https://ua.news/wp-content/uploads/2018/05/45.jpg");
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translate3d(0,0,0);
+   
+  &-block {
+    max-width: 500px;
+    width: 100%;
+    margin: 20px;
+  }
+  &-body {
+    padding: 40px 85px 20px 85px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  &-title {
+    margin-bottom: 20px;
+  }
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (max-width : 480px){
+  .auth {
+    &-body {
+      padding: 20px 20px 20px 20px;
+    }
+  }
+}
+/* Custom, iPhone Retina */
+@media only screen and (max-width : 320px){
+  .auth {
+    &-block {
+      margin: 5px;
+    }
+  }
+}

@@ -1,0 +1,46 @@
+@mixin mobileStyle {
+  .mobile-phone-block {
+    display: block
+  }
+
+  .desktop-block-content {
+    display: none;
+  }
+}
+
+
+.order {
+  &-header {
+    background-color: $white;
+    color: $rhino;
+    box-sizing: border-box;
+    border-bottom: 1px solid $mercury;
+    &-body {
+      display: flex;
+      align-items: center;
+    }
+    &.mat-toolbar-single-row {
+      font-size: 14px;
+      font-weight: 400;
+      height: 56px;
+      padding: 0;
+    }
+  }
+}
+
+.mobile-phone-block {
+  display: none;
+}
+
+.desktop-block-content {
+  display: block;
+}
+
+
+@media (min-width: 0) and (max-width: 320px) {
+  @include mobileStyle;
+}
+
+@media (min-width: 321px) and (max-width: 776px) {
+  @include mobileStyle;
+}

@@ -1,0 +1,175 @@
+.input {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 400px;
+  height: 70px;
+  box-sizing: border-box;
+
+  &-button {
+    width: fit-content;
+    word-wrap: normal;
+    white-space: pre;
+    height: 36px;
+    border: none;
+    background: none;
+    border-left: 1px solid $silver;
+    padding: 0 15px;
+    font-family: $roboto;
+    color: $silver;
+    font-weight: 500;
+    font-size: 14px;
+    cursor: pointer;
+    outline: none;
+    &:hover {
+      color: $salem;
+    }
+  }
+  &-icon {
+    color: $silver;
+    padding: 0 10px;
+  }
+  &-error {
+    font-family: $roboto;
+    font-size: 12px;
+    color: $carnation;
+    line-height: 14px;
+  }
+  &.input-short .input-content {
+    width: 70px;
+  }
+  &.invalid {
+    .input {
+      &-content {
+        border-color: $carnation;
+      }
+    }
+  }
+  &-main {
+    background-color: $alabaster;
+    padding: 10px 8px;
+    border: 1px solid $santas-gray;
+    color: $santas-gray;
+    border-radius: 2px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    height: 43px;
+    box-sizing: border-box;
+    & > input {
+      border: none;
+      background-color: transparent;
+      outline: none;
+      width: 100%;
+      height: 24px;
+      font-size: 16px;
+      caret-color: $salem;
+      font-weight: 400;
+      font-family: $roboto;
+      &::placeholder {
+        color: rgba(0, 0, 0, 0.42);
+      }
+      &[type='password'] {
+        letter-spacing: 3px;
+        &::placeholder {
+          letter-spacing: 0;
+        }
+      }
+    }
+    & > mat-icon {
+      cursor: pointer;
+      &:hover {
+        color: $salem;
+      }
+    }
+    &:hover,
+    &:focus {
+      border-color: $salem;
+    }
+  }
+  &-check {
+    border-radius: 2px;
+    border: 1px solid $silver;
+    background-color: $gallery;
+    display: flex;
+    margin: 10px 0;
+
+    &-body {
+      border-right: 1px solid $silver;
+      padding: 10px 15px;
+      width: 100%;
+      & > input {
+        width: 100%;
+        background: none;
+        border: none;
+        outline: none;
+      }
+    }
+    &-button {
+      width: 100px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-size: 14px;
+      color: $alto;
+      font-family: $roboto;
+      font-weight: 500;
+      outline: none;
+      &:hover {
+        color: $salem;
+      }
+    }
+  }
+  &-content {
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    display: flex;
+    border: 1px solid $silver;
+    background-color: $alabaster;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    box-sizing: border-box;
+    &:focus-within {
+      border: 1px solid $salem;
+    }
+
+    & > input {
+      padding: 0 15px;
+      font-size: 14px;
+      color: $rhino;
+      line-height: 34px;
+      width: 100%;
+      background: none;
+      border: none;
+      outline: none;
+    }
+    .input-check-button {
+      height: 34px;
+      color: $salem !important;
+      border-left: 1px solid $silver !important;
+      padding: 9px 7px !important;
+      font-size: 12px !important;
+      &:disabled {
+        color: #d2d2d2 !important;
+      }
+    }
+  }
+}
+.invalid .input {
+  &-check,
+  &-check-body {
+    border-color: $carnation;
+  }
+}
+
+.focus > .input-main {
+  border-color: $salem;
+}
+
+.input-icon {
+  cursor: pointer;
+}

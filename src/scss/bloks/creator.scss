@@ -1,0 +1,119 @@
+.creator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+  &-content {
+    //padding: 15px;
+  }
+  &-block {
+    margin: 15px;
+    // margin-bottom: 0;
+    border-right: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.12);
+    min-width: 500px;
+    max-width: 100%;
+    box-sizing: border-box;
+    width: fit-content;
+
+    &-content {
+      padding: 25px 30px;
+      &.creator-block-with_footer {
+        padding-bottom: 0;
+      }
+    }
+    &-label {
+      font-family: $roboto;
+      color: $rhino;
+      font-size: 16px;
+      font-weight: 500;
+      margin-bottom: 15px;
+    }
+    &-subtitle {
+      font-family: $roboto;
+      color: $rhino;
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 15px;
+      opacity: 0.4;
+    }
+
+    &-footer {
+      justify-content: flex-end;
+      border-top: 1px solid $mercury;
+      padding: 20px 30px;
+      padding-bottom: 0;
+      align-items: center;
+      &.between {
+        justify-content: space-between;
+      }
+    }
+    &-timer > div {
+      margin-right: 20px;
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}
+
+// @supports (-ms-input-placeholder:true) {
+//   .creator {
+//     .creator-block {
+//       max-width: 600px;
+//     }
+//   }
+// }
+
+// @supports (-ms-ime-align:auto) {
+//   .creator {
+//     border: 1px solid red;
+//     .block {
+//       outline: 1px solid red;
+//       max-width: 70%;
+//     }
+//   }
+// }
+
+@media only screen and (min-width: 375px) and (max-width: 667px) {
+
+  .creator-block.creator-block-content {
+    width: 600px;
+    margin: 0;
+  }
+
+  .creator-block-content {
+    padding: 20px 12px;
+
+    .step-body {
+      padding: 0px;
+    }
+
+    .step-footer {
+      padding: 0px;
+      padding-top: 20px;
+    }
+  }
+}
+
+@media only screen and (min-width: 320px) and (max-width: 568px) {
+
+  .creator-block.creator-block-content {
+    min-width: 0;
+    max-width: 290px;
+  }
+
+  .creator-block-content {
+    padding: 20px 12px;
+
+    .step-body {
+      padding: 0px;
+    }
+
+    .step-footer {
+      padding: 0px;
+      padding-top: 20px;
+    }
+  }
+}

@@ -1,0 +1,14 @@
+.notifications {
+  &-block {
+
+  }
+  &-filter {
+    max-width: 500px;
+    margin-bottom: 20px;
+  }
+  &-content {
+    & > table {
+      width: 100%;
+    }
+  }
+}

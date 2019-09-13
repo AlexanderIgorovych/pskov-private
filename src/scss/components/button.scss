@@ -1,0 +1,68 @@
+.button {
+  &.active {
+    color: $salem;
+  }
+  &.mat-raised-button,
+  &.mat-flat-button {
+    margin: 0 15px;
+    &:last-child {
+      margin-right: 0;
+    }
+    &:first-child {
+      margin-left: 0;
+    }
+    border-radius: 4px;
+  }
+  &-primary {
+    background-color: $salem;
+    color: $white;
+    font-size: 14px;
+    line-height: 36px;
+  }
+  &-bordered {
+    color: $salem;
+    &.mat-raised-button,
+    &.mat-flat-button {
+      border: 1px solid $salem;
+      box-sizing: border-box;
+      line-height: 34px;
+    }
+  }
+  &-card {
+    &.mat-raised-button,
+    &.mat-flat-button {
+      //padding: 5px 50px;
+      height: 50px;
+      max-width: 210px;
+      white-space: normal;
+      word-break: break-word;
+      font-size: 14px;
+      line-height: 16px;
+      width: fit-content;
+    }
+  }
+  &-transparent {
+    color: $salem;
+  }
+}
+
+.back-step {
+  position: absolute;
+  bottom: 0;
+  padding-left: 70px;
+  padding-bottom: 20px;
+  background: transparent;
+  border: none;
+  color: $salem;
+  outline: none;
+  cursor: pointer;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  line-height: normal;
+  font-size: 14px;
+  img {
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+}

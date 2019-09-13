@@ -1,0 +1,67 @@
+.step {
+  margin: 30px 0;
+  .step-footer > button:not(.step-button-add):hover {
+    color: #ffffff;
+  }
+  &-body,
+  &-footer {
+    padding: 20px 30px;
+  }
+  &-footer {
+    border-top: 1px solid $mercury;
+    .step-button-raised {
+      color: $white;
+      background-color: $salem;
+    }
+  }
+  &-block {
+    max-width: 500px;
+  }
+  &-title {
+    font-size: 16px;
+    color: $rhino;
+    font-family: $roboto;
+    font-weight: 500;
+  }
+  &-result {
+    &-body {
+      display: flex;
+      align-items: center;
+      padding: 10px 0;
+    }
+    &-icon {
+      padding-right: 8px;
+      color: $salem;
+    }
+    &-text {
+      color: $rhino;
+      font-size: 14px;
+      font-weight: 400;
+      font-family: $roboto;
+    }
+    &-error {
+      font-size: 12px;
+      font-weight: 400;
+      font-family: $roboto;
+      color: $carnation;
+    }
+  }
+  .invalid .step-result {
+    &-icon {
+      color: $carnation;
+    }
+  }
+}
+
+.add-partner .mat-stepper-horizontal-line {
+  max-width: 50px;
+}
+
+.step-button:disabled.mat-raised-button:disabled {
+  color: #ffffff;
+}
+
+.button.mat-raised-button:disabled,
+.button.mat-flat-button:disabled {
+  color: #ffffff;
+}

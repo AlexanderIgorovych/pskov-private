@@ -1,0 +1,119 @@
+.header {
+  .hamburger-icon {
+    width: 50px;
+    height: 50px;
+    position: relative;
+    transform: rotate(0deg);
+    transition: .5s ease-in-out;
+    cursor: pointer;
+    margin-top: 20px;
+
+    div {
+      background-color: #fff;
+      height: 4px;
+      top: 20px;
+      position: relative;
+      transform: rotate(0deg);
+      transition: .25s ease-in-out;
+    }
+  }
+
+  .hamburger-icon div:nth-child(1){
+    top: 2px;
+  }
+
+  .hamburger-icon div:nth-child(2){
+    top: 10px;
+  }
+
+  .hamburger-icon div:nth-child(3){
+    top: 18px;
+  }
+
+  .hamburger-icon.active div:nth-child(1){
+    transform: rotate(45deg);
+    top: 15px;
+  }
+
+  .hamburger-icon.active div:nth-child(2){
+    opacity: 0;
+  }
+
+  .hamburger-icon.active div:nth-child(3){
+    transform: rotate(-45deg);
+    top: 8px;
+  }
+}
+
+.header {
+  background-color: $salem;
+  &-content {
+    display: flex;
+    justify-content: space-between;
+  }
+  &-title {
+    color: $white;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    & > span {
+      outline: none;
+    }
+  }
+  &-menu {
+    color: $white;
+    & > button {
+      margin: 0 20px;
+      &:first-child {margin-left: 0}
+      &:last-child {margin-right: 0}
+      &.header-button {
+        background-color: $white;
+        color: $salem;
+        margin-right: 37px;
+        &.active {
+          background-color: $lightning-yellow;
+        }
+      }
+      &.header-icon {
+        & .mat-badge-content {
+          background-color: $lightning-yellow;
+          color: $blue-stone;
+          transition: opacity ease-out .3s;
+        }
+        &.active {
+          color: $lightning-yellow;
+
+          & .mat-badge-content {
+            opacity: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 651px) {
+  .header {
+    .hamburger-icon {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: 650px) {
+  .header {
+    .header-title {
+      margin-left: 13px;
+    }
+    .header-menu {
+      .header-button {
+        display: none;
+      }
+
+      button:not(:nth-child(3)) {
+        display: none;
+      }
+    }
+  }
+}

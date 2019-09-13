@@ -1,0 +1,123 @@
+.cdk-global-overlay-wrapper .mat-dialog-container {
+  border-radius: 8px;
+  padding: 0;
+  // width: 830px;
+  margin: 20px;
+  max-height: 95vh;
+  box-sizing: border-box;
+}
+
+.modal {
+  padding: 24px 65px;
+  width: 100%;
+
+  box-sizing: border-box;
+  &-logout {
+  }
+  &-text {
+    color: $rhino;
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+  &-actions {
+    justify-content: flex-end;
+    & button {
+      color: $salem;
+    }
+  }
+  &-header {
+    background-color: $white;
+    border-bottom: 1px solid $mystic;
+    justify-content: space-between;
+    &.mat-toolbar-single-row {
+      padding: 0 65px;
+    }
+    &-title {
+      color: $rhino;
+    }
+    &-buttons {
+      & button {
+        color: $salem;
+      }
+    }
+  }
+  &-stepper {
+    position: relative;
+    // min-height: 675px;
+    max-height: 95vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .mat-horizontal-stepper-header-container {
+      padding: 0 20px;
+    }
+    &-footer {
+      justify-content: flex-end;
+      padding: 30px 70px;
+    }
+  }
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (max-width: 1200px) {
+  .cdk-global-overlay-wrapper .mat-dialog-container {
+    width: 100%;
+  }
+}
+/* Medium Devices, Desktops */
+@media only screen and (max-width: 992px) {
+}
+/* Small Devices, Tablets */
+@media only screen and (max-width: 768px) {
+  .modal {
+    padding: 24px;
+    &-header {
+      &.mat-toolbar-single-row {
+        padding: 0 24px;
+      }
+      &-title {
+        word-wrap: break-spaces;
+        white-space: normal;
+        line-height: 22px;
+      }
+    }
+    button.modal-menu-item__content {
+      word-wrap: break-spaces;
+      white-space: normal;
+      line-height: 17px;
+      text-align: left;
+    }
+  }
+}
+/* Extra Small Devices, Phones */
+@media only screen and (max-width: 480px) {
+  .modal {
+    padding: 15px;
+    &-header {
+      &.mat-toolbar-single-row {
+        padding: 0 15px;
+      }
+    }
+    &-menu {
+      &-item {
+        font-size: 12px;
+        &__sub.modal-menu-item__content {
+          display: flex;
+          flex-direction: column;
+          height: fit-content;
+        }
+      }
+      &-buttons {
+        &-item {
+          margin: 5px;
+          padding: 5px;
+          width: 100px;
+          font-size: 10px;
+        }
+      }
+    }
+  }
+}
+/* Custom, iPhone Retina */
+@media only screen and (max-width: 320px) {
+}

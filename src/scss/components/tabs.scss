@@ -1,0 +1,24 @@
+.tabs {
+  height: 100%;
+  & .mat-tab-header {
+    background-color: $white;
+  }
+  & .mat-tab-labels {
+    @include container();
+  }
+  & .mat-tab-group,
+  & .mat-tab-body-wrapper,
+  & .mat-tab-body-content {
+    height: 100%;
+  }
+}
+.c-offline {
+  background-color: #e24853;
+  color: #ffffff;
+  padding: 10px 40px;
+  font-family: Roboto;
+  position: relative;
+  z-index: 1000000;
+  position: sticky;
+  top: 0;
+}

@@ -1,0 +1,113 @@
+.stepper {
+  & .mat-horizontal-stepper-header-container {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.12);
+  }
+  & .mat-step-icon {
+    background-color: $salem;
+  }
+  .mat-step-header {
+    padding: 0 35px;
+    &:first-child {
+      margin-left: 0;
+    }
+
+    .mat-step-label,
+    .mat-step-label.mat-step-label-active {
+      color: $silver;
+    }
+    .mat-step-label.mat-step-label-selected {
+      color: $rhino;
+    }
+  }
+  .mat-horizontal-content-container {
+    height: 100%;
+  }
+}
+
+.step {
+  &-title {
+    margin-bottom: 20px;
+  }
+  &-body {
+    min-height: 180px;
+  }
+  &-footer {
+    display: flex;
+    justify-content: space-between;
+
+    & > button {
+      width: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      & > span {
+        white-space: normal;
+        word-wrap: break-spaces;
+        font-size: 14px;
+        line-height: 16px;
+      }
+      &:first-child {
+        margin-right: 10px;
+      }
+      &:last-child {
+        margin-left: 10px;
+      }
+      &:hover {
+        color: $salem;
+      }
+    }
+  }
+
+  &-button {
+    &-add {
+      color: $salem;
+      & .mat-button-wrapper {
+        padding: 5px 0;
+        text-align: left;
+        display: flex;
+      }
+    }
+    &-icon {
+      height: auto;
+      padding-right: 15px;
+      display: flex;
+      align-items: center;
+    }
+  }
+}
+
+.step-result-icon--error {
+  color: $carnation;
+}
+
+@media (max-width: 700px) {
+  .stepper {
+    & .mat-horizontal-stepper-header-container {
+      // overflow-x: scroll;
+    }
+
+
+    .mat-step-header {
+      padding-top: 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin-left: 30px;
+
+      .mat-step-label,
+      .mat-step-label.mat-step-label-active {
+        font-size: 12px;
+        }
+
+      .mat-stepper-horizontal-line {
+        margin-top: 5px;
+      }
+
+      .mat-step-text-label {
+        text-align: center;
+        margin-top: 3px;
+      }
+    }
+  }
+}

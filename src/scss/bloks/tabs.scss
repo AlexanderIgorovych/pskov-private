@@ -1,0 +1,8 @@
+.tabs {
+  & .mat-ink-bar {
+    background-color: $salem;
+  }
+  & .mat-tab-label-active > .mat-tab-label-content{
+    color: $rhino;
+  }
+}

@@ -1,0 +1,27 @@
+.table {
+  border: 1px solid $gallery;
+  border-radius: 2px;
+  &-row {
+    &-odd {
+      background-color: $white;
+    }
+    &-even {
+      background-color: $gallery;
+    }
+  }
+  .mat-header-row {
+    background-color: $alto;
+  }
+  .mat-cell, .mat-header-cell {
+    border-right: 1px solid $silver;
+    padding-left: 20px;
+
+    &:last-child {
+      border-right: none
+    }
+  }
+  .mat-header-cell {
+    color: $tundora;
+    font-size: 14px;
+  }
+}

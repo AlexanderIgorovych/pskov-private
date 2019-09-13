@@ -1,0 +1,35 @@
+.form {
+  &-button {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin: 10px 0;
+    & > button {
+      background-color: $salem;
+      color: $white;
+    }
+  }
+  &-field {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    &-errors {
+      font-size: 12px;
+      color: $carnation;
+      font-weight: 500;
+      margin-bottom: 3px;
+    }
+    & > .mat-select {
+    }
+  }
+}
+
+.confirmed-caption {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  line-height: normal;
+  font-size: 12px;
+
+  color: #2070cd;
+}
