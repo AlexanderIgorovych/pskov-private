@@ -1,0 +1,55 @@
+<div class="tabs">
+<nav mat-tab-nav-bar>
+  <a mat-tab-link
+     *ngFor="let link of menuItems; let i = index"
+     [routerLink]="['/system', i]"
+     routerLinkActive #rla="routerLinkActive"
+     [active]="rla.isActive">
+    {{link.label}}
+  </a>
+</nav>
+</div>
+
+<!--<div class="tabs">-->
+  <!--<mat-tab-group-->
+    <!--[selectedIndex]="selected"-->
+    <!--(selectedIndexChange)="selected = $event; onClick()"-->
+    <!--color="none">-->
+    <!--<mat-tab-->
+      <!--*ngFor="let item of menuItems; let i = index"-->
+      <!--[label]="item.label" >-->
+      <!--<div class="container">-->
+        <!--<mat-card class="block-content">-->
+
+
+        <!--</mat-card>-->
+      <!--</div>-->
+    <!--</mat-tab>-->
+  <!--</mat-tab-group>-->
+<!--</div>-->
+
+<!--<div class="tabs">-->
+  <!--<mat-tab-group color="none">-->
+    <!--<mat-tab label="ТЕКУЩИЕ ВЗВЕШИВАНИЯ">-->
+      <!--<div class="container">-->
+        <!--<mat-card class="block-content">-->
+
+          <!--<app-weighings></app-weighings>-->
+
+        <!--</mat-card>-->
+      <!--</div>-->
+    <!--</mat-tab>-->
+    <!--<mat-tab label="ОТВЕТСТВЕННОЕ ХРАНЕНИЕ">-->
+      <!--<div class="container">-->
+        <!--<mat-card class="block-content">-->
+
+          <!--<app-storage></app-storage>-->
+
+        <!--</mat-card>-->
+      <!--</div>-->
+    <!--</mat-tab>-->
+  <!--</mat-tab-group>-->
+<!--</div>-->
+
+
+

@@ -1,0 +1,67 @@
+$green : #109754;
+
+.block-order {
+  padding-top: 20px;
+}
+
+.cutters {
+  max-width: 530px;
+  height: 213px;
+  border-radius: 4px;
+  box-shadow: 0px 2px 2px rgba(47, 74, 105, 0.12), 0px 0px 4px rgba(47, 74, 105, 0.14);
+  padding-top: 24px;
+  margin-left: 70px;
+  margin-top: 30px;
+
+  .cutters-content {
+    max-width: 350px;
+    margin-left: 30px;
+  }
+
+  p {
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+    color: #293B5A;
+    font-weight: 500;
+    margin: 0;
+  }
+
+  .cutters-input {
+    margin-top: 24px;
+  }
+
+  .cutters-footer {
+    border-top: 1px solid #E7EAEF;
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    margin-top: 30px;
+  }
+
+  button {
+    border: none;
+    background-color: $green;
+    margin-right: 29px;
+    margin-bottom: 5px;
+    border-radius: 2px;
+    margin-top: 20px;
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    color: #fff;
+    height: 36px;
+    width: 180px;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2), 0px 2px 2px rgba(0, 0, 0, 0.12), 0px 0px 2px rgba(0, 0, 0, 0.14);
+  }
+
+  button:disabled {
+    background-color: #CECDCD;
+  }
+}
+
+@media (max-width: 688px) {
+  .cutters {
+    margin-left: 0;
+    margin-top: 20px;
+  }
+}

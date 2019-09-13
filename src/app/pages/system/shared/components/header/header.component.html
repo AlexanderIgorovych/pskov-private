@@ -1,0 +1,61 @@
+<mat-toolbar class="header">
+  <div class="header-mobile-section">
+    <div (click)="switchMenu()" class='hamburger-icon' [ngClass]="{'active' : menuBack}">
+      <div class="line line-1"></div>
+      <div class="line line-2"></div>
+      <div class="line line-3"></div>
+    </div>
+  </div>
+  <div class="container header-content">
+    <div class="header-title">
+      <span [routerLink]="['/system']">{{ title | uppercase }}</span>
+    </div>
+    <div class="header-menu">
+      <button
+        mat-flat-button
+        color="none"
+        class="header-button"
+        (click)="openDialog()"
+      >
+        НОВОЕ ВЗВЕШИВАНИЕ
+      </button>
+
+      <button
+        (click)="openCallDialog()"
+        mat-icon-button
+        color="none"
+        class="header-icon"
+      >
+        <mat-icon aria-label="Example icon-button with a heart icon"
+          >phone</mat-icon
+        >
+      </button>
+
+      <button
+        mat-icon-button
+        color="none"
+        class="header-icon"
+        routerLinkActive="active"
+        [routerLink]="['/system', 'notifications']"
+      >
+        <mat-icon
+          aria-label="Example icon-button with a heart icon"
+          matBadge="{{ notificationCount }}"
+          matBadgePosition="before"
+          >notifications</mat-icon
+        >
+      </button>
+
+      <button
+        mat-icon-button
+        color="none"
+        class="header-icon"
+        (click)="onLogOut()"
+      >
+        <mat-icon aria-label="Example icon-button with a heart icon"
+          >exit_to_app</mat-icon
+        >
+      </button>
+    </div>
+  </div>
+</mat-toolbar>

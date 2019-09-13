@@ -1,0 +1,20 @@
+<div class="modal modal-logout">
+  <div class="modal-text">
+    <h2 mat-dialog-title class='modal-header-text'>
+      Вы уверены, что хотите запросить звонок от оператора?
+    </h2>
+    <p mat-dialog-content class="text modal-parapraph">
+      Оператор получит уведомление и перезвонит вам в ближайшее время
+    </p>
+  </div>
+  <div mat-dialog-actions class="modal-actions">
+    <div class="action-row">
+      <button (click)="cancel()" mat-button cdkFocusInitial>ОТМЕНИТЬ</button>
+    </div>
+    <div class="action-row">
+      <button (click)="requestCall()" class="cancel" mat-button>
+        ЗАПРОСИТЬ ЗВОНОК
+      </button>
+    </div>
+  </div>
+</div>

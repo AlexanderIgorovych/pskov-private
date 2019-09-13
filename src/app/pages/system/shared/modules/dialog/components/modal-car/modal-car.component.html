@@ -1,0 +1,202 @@
+<div class="modal-stepper">
+  <mat-horizontal-stepper #carStepper class="stepper" [linear]="isLinear">
+    <mat-step label="Тип машины" [stepControl]="form1">
+      <div class="creator">
+        <app-type-picker
+          [title]="tabTitle"
+          [tabs]="tabs"
+          (pick)="onPartnerTypeSelect($event)"
+        ></app-type-picker>
+        <app-form-card
+          *ngIf="partnerType !== null"
+          [isStep]="false"
+          [title]="'ВЫБЕРИТЕ МАРКУ МАШИНЫ'"
+        >
+          <ng-container body>
+            <form [formGroup]="form1" #form_human>
+              <app-autosuggets
+                [data]="autoSuggested | async"
+                (changes)="searchForCarMake($event)"
+                (picked)="setPicketSuggestion($event)"
+                [inputFormControl]="form1Name"
+                [placeholder]="'Выберите марку'"
+              >
+                <div input-control></div>
+                <div *ngIf="errorMess" error class="l-error--extended">
+                  <div
+                    *ngIf="form1Name?.touched && !!form1Name?.errors?.required"
+                    class="input-error"
+                  >
+                    Обязательное поле
+                  </div>
+                  <div *ngIf="!!form1Name?.errors?.async" class="input-error">
+                    Марка не найдена
+                  </div>
+                </div>
+              </app-autosuggets>
+
+              <div class="creator-block-label">
+                <span>ВВЕДИТЕ НОМЕР МАШИНЫ</span>
+              </div>
+
+              <div class="input">
+                <div class="input-content">
+                  <input
+                    (keyup)="restoreNewPartner()"
+                    type="text"
+                    placeholder="A 111 AA 11"
+                    (keyup)="onDetermineFocus($event)"
+                    formControlName="identifier"
+                  />
+                  <mat-icon
+                    *ngIf="form1Identifier?.value?.length"
+                    class="input-icon"
+                    (click)="form1Identifier.reset()"
+                    >cancel</mat-icon
+                  >
+                </div>
+                <div *ngIf="errorMess" class="error-section-timeout">
+                  <div
+                    *ngIf="
+                      form1Identifier.touched &&
+                      form1Identifier?.errors &&
+                      (!!form1Identifier?.errors?.pattern ||
+                        !!form1Identifier?.errors?.maxlength ||
+                        !!form1Identifier?.errors?.required ||
+                        !!form1Identifier?.errors?.minlength)
+                    "
+                    class="input-error"
+                  >
+                    <span *ngIf="form1Identifier.errors?.minlength">Слишком короткий номер</span>
+                    <span *ngIf="form1Identifier.errors?.maxlength">Слишком длинный номер</span>
+
+                    <span
+                      *ngIf='form1Identifier.errors?.pattern && !form1Identifier.errors?.minlength &&
+                      !form1Identifier.errors?.maxlength'>
+                      Номер не соответствует стандартной форме заполнения. Обратитесь в отдел компьютерного обеспечения
+                    </span>
+                  </div>
+                  <div
+                    *ngIf="
+                      form1Identifier.touched &&
+                      form1Identifier?.errors &&
+                      !!form1Identifier?.errors?.async
+                    "
+                    class="input-error"
+                  >
+                    <span>Данная машина уже имеется в базе</span>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </ng-container>
+          <ng-container footer>
+            <div class="creator-block-footer row">
+              <button
+                (click)="onSubmitFirstForm(carStepper)"
+                mat-flat-button
+                [disabled]="form1.invalid"
+                class="button button-primary"
+                color="none"
+              >
+                СЛЕДУЮЩИЙ ШАГ
+              </button>
+            </div>
+          </ng-container>
+        </app-form-card>
+      </div>
+    </mat-step>
+    <mat-step label="Документы">
+      <div class='car-docs'>
+        <app-add-photo
+          *ngIf="typePartner === 0 && isLocal"
+          [nameType]="'certificate'"
+          [title]="'ДОБАВЬТЕ ДОКУМЕНТЫ НА МАШИНУ'"
+          [files]="files"
+          (photoPicked)="generateFile($event, files)"
+          (photoDeleted)="deletePhoto($event, files)"
+        ></app-add-photo>
+        <app-add-photo
+          *ngIf="typePartner === 0 && isLocal"
+          [nameType]="'passport'"
+          [title]="'ДОБАВЬТЕ ПАСПОРТ ГРАЖДАНИНА РФ'"
+          [files]="filesTtn"
+          (photoPicked)="generateFile($event, filesTtn)"
+          (photoDeleted)="deletePhoto($event, filesTtn)"
+        ></app-add-photo>
+
+        <app-add-photo
+          *ngIf="typePartner === 1"
+          [nameType]="'certificate'"
+          [title]="'ДОБАВЬТЕ ДОКУМЕНТЫ НА МАШИНУ'"
+          [files]="files"
+          (photoPicked)="generateFile($event, files)"
+          (photoDeleted)="deletePhoto($event, files)"
+        ></app-add-photo>
+        <app-add-photo
+          *ngIf="typePartner === 1"
+          [nameType]="'ttn'"
+          [title]="'ДОБАВЬТЕ ТТН'"
+          [files]="filesPassport"
+          (photoPicked)="generateFile($event, filesPassport)"
+          (photoDeleted)="deletePhoto($event, filesPassport)"
+        ></app-add-photo>
+
+        <app-add-photo
+          *ngIf="typePartner === 0 && !isLocal"
+          [nameType]="'certificate'"
+          [title]="'ДОБАВЬТЕ ДОКУМЕНТЫ НА МАШИНУ'"
+          [files]="files"
+          (photoPicked)="generateFile($event, files)"
+          (photoDeleted)="deletePhoto($event, files)"
+        ></app-add-photo>
+        <app-add-photo
+          *ngIf="typePartner === 0 && !isLocal"
+          [nameType]="'international'"
+          [title]="'ДОБАВЬТЕ ИНОСТРАННЫЙ ПАСПОРТ'"
+          [files]="filesInternPass"
+          (photoPicked)="generateFile($event, filesInternPass)"
+          (photoDeleted)="deletePhoto($event, filesInternPass)"
+        ></app-add-photo>
+        <app-add-photo
+          *ngIf="typePartner === 0 && !isLocal"
+          [nameType]="'statement'"
+          [title]="'ДОБАВЬТЕ СВИДЕТЕЛЬСТВО О РЕГИСТРАЦИИ'"
+          [files]="filesStatement"
+          (photoPicked)="generateFile($event, filesStatement)"
+          (photoDeleted)="deletePhoto($event, filesStatement)"
+        ></app-add-photo>
+
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+  <div *ngIf="isAlreadyExistError" class="error-message-section">
+    <span class="input-error">Машина с таким номером уже существует</span>
+  </div>
+  <div class="modal-stepper-footer row">
+    <button
+      mat-flat-button
+      color="none"
+      class="button button-bordered"
+      (click)="onNoClick()"
+    >
+      ОТМЕНИТЬ
+    </button>
+    <button
+      [disabled]="invalidFinal || isAlreadyExistError"
+      mat-flat-button
+      color="none"
+      class="button button-primary"
+      (click)="prefillFirstStepWithNewPartner()"
+    >
+      ПРОДОЛЖИТЬ
+    </button>
+  </div>
+  <button
+    class="back-step"
+    (click)="previousStep()"
+    *ngIf="stepper.selectedIndex"
+  >
+    <img src="assets/Shapeback.png" alt="" /> <span>Назад</span>
+  </button>
+</div>

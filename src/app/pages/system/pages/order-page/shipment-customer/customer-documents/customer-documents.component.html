@@ -1,0 +1,21 @@
+<div class="customer-docs">
+  <mat-card class='order-docs-verify'>
+    <app-add-photo
+      [nameType]="'partnerDocuments'"
+      [title]="'ДОБАВЬТЕ ДОКУМЕНТЫ'"
+      [files]="userDocuments"
+      (photoPicked)="generateFile($event, userDocuments)"
+      (photoDeleted)="deletePhoto($event, userDocuments)">
+    </app-add-photo>
+
+    <mat-card-footer>
+      <div class="order-docs-btn">
+        <button [disabled]="!areFilled || areDocumentSended" (click)="sendDocs()">ОТПРАВИТЬ ОПЕРАТОРУ</button>
+      </div>
+    </mat-card-footer>
+  </mat-card>
+
+  <div class="container-btn">
+    <button (click)="nextWeigh()" [disabled]="!areDocumentSended">ПРОДОЛЖИТЬ</button>
+  </div>
+</div>

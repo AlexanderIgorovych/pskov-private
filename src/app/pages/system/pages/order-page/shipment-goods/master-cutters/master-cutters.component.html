@@ -1,0 +1,29 @@
+<div class="container">
+
+  <mat-card class='block-order'>
+      <div class="cutters">
+        <div class="cutters-content">
+          <p>УКАЖИТЕ ИМЯ МАСТЕРА-РЕЗЧИКА</p>
+
+          <div class='cutters-input'>
+            <form [formGroup]="cutterForm" (ngSubmit)="pickCutter()">
+
+              <mat-select formControlName="cutter" placeholder="Мастер-резчик не выбран" class="input-main">
+
+                <mat-option *ngFor="let cutter of cuttersList" value="{{ cutter.id }}">
+                  {{ cutter.name }}
+                </mat-option>
+              </mat-select>
+            </form>
+          </div>
+
+        </div>
+
+        <div class="cutters-footer">
+          <button  [disabled]="cutterForm.invalid" (click)="pickCutter()">ВЫБРАТЬ МАСТЕРА</button>
+        </div>
+      </div>
+
+  </mat-card>
+
+</div>

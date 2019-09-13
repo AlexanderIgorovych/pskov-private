@@ -1,0 +1,33 @@
+<div class="step-reason">
+  <div class="mat-card-wrapper">
+    <mat-card>
+      <!-- Title section -->
+      <mat-card-title class="reason-title">
+        <p>УКАЖИТЕ ПРИЧИНУ ПОСТАНОВКИ НА ОТВЕТСТВЕННОЕ ХРАНЕНИЕ</p>
+      </mat-card-title>
+      <!-- Conent section -->
+      <mat-card-content>
+        <section class="checkbox-section">
+
+          <div class="reasons">
+            <mat-checkbox [checked]="reason.value" (change)="onChangeCheckbox(idx)" class='checbkox-reason' *ngFor="let reason of reasonsList.slice(0, 3); let idx = index">
+              <p>{{ reason.name }}</p>
+            </mat-checkbox>
+          </div>
+          <div class="reasons">
+            <mat-checkbox [checked]="reason.value" (change)="onChangeCheckbox(idx + 3)" class='checbkox-reason' *ngFor="let reason of reasonsList.slice(3); let idx = index">
+              <p>{{ reason.name }}</p>
+            </mat-checkbox>
+          </div>
+
+        </section>
+      </mat-card-content>
+      <!-- Footer section -->
+      <mat-card-footer>
+        <div class="footer-btn">
+            <button [disabled]="!isButtonValid" (click)="onSubmitReasons()" class='btn'>ПРОДОЛЖИТЬ</button>
+        </div>
+      </mat-card-footer>
+    </mat-card>
+  </div>
+</div>

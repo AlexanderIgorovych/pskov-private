@@ -1,0 +1,9 @@
+<div class="modal modal-logout">
+  <div class="modal-text">
+    <h2 mat-dialog-title>Вы уверены, что хотите выйти из системы?</h2>
+  </div>
+  <div mat-dialog-actions class="modal-actions">
+    <button mat-button (click)="onClose(false)">ОТМЕНИТЬ</button>
+    <button mat-button (click)="onClose(true)" cdkFocusInitial>ВЫЙТИ ИЗ СИСТЕМЫ</button>
+  </div>
+</div>

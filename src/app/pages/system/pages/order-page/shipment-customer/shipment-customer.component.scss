@@ -1,0 +1,50 @@
+$white: #ffffff;
+$black: #000000;
+
+$salem: #109754;
+$lightning-yellow: #ffc51d;
+$carnation: #f54d59;
+
+$blue-stone: #00636e;
+$rhino: #293b5a;
+
+$alabaster: #f9f9f9;
+$santas-gray: #949dad;
+$mystic: #e0e6ed;
+$mercury: #e2e2e2;
+
+$tundora: #464646;
+$silver: #bab9b9;
+$alto: #d2d2d2;
+$gallery: #f0f0f0;
+
+::ng-deep .stepp-shipm {
+  & .mat-horizontal-stepper-header-container {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.12);
+  }
+
+  .mat-stepper-horizontal-line {
+    flex: 0;
+    width: 54px;
+  }
+
+  & .mat-step-icon {
+    background-color: $salem;
+  }
+  .mat-step-header {
+    margin: 0;
+
+    .mat-step-label,
+    .mat-step-label.mat-step-label-active {
+      color: $silver;
+    }
+    .mat-step-label.mat-step-label-selected {
+      color: $rhino;
+    }
+  }
+  .mat-horizontal-content-container {
+    height: 100%;
+  }
+}
+
+//

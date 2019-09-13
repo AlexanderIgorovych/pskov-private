@@ -1,0 +1,96 @@
+.input {
+  max-width: none;
+  position: relative;
+}
+
+.input-error {
+  max-width: 400px;
+}
+
+.car-docs {
+  padding-top: 30px;
+}
+
+.error-message-section {
+  width: 100%;
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  span {
+    position: absolute;
+    margin-right: 30px;
+    width: 310px;
+    margin-bottom: 10px;
+  }
+}
+
+@media (min-width: 0) and (max-width: 320px) {
+
+  .creator {
+    .input {
+      height: 75px;
+    }
+  }
+
+
+  .creator {
+    .creator-block-label {
+      font-size: 14px;
+    }
+  }
+
+
+  .modal-stepper-footer {
+    padding: 10px 15px;
+    justify-content: center;
+    margin-bottom: 30px;
+
+    button {
+      width: 110px;
+      font-size: 12px;
+    }
+
+    button:last-child {
+      margin-left: 3px;
+    }
+  }
+
+  .back-step {
+    margin-top: 20px;
+    bottom: -10px;
+    left: -50px;
+  }
+}
+
+
+@media (min-width: 321px) and (max-width: 700px){
+
+  .creator {
+    .creator-block-label {
+      font-size: 14px;
+    }
+
+    &-block-footer {
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+
+  .modal-stepper-footer {
+    padding: 10px 15px;
+    justify-content: center;
+    margin-bottom: 30px;
+
+    button {
+      width: 110px;
+      font-size: 12px;
+    }
+  }
+
+  .back-step {
+    margin-top: 20px;
+    bottom: -10px;
+    left: -50px;
+  }
+}

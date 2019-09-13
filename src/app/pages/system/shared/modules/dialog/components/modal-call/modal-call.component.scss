@@ -1,0 +1,23 @@
+.text {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  line-height: normal;
+  font-size: 14px;
+  color: #293b5a;
+}
+
+.modal-parapraph {
+  max-width: 534px;
+}
+
+@media (max-width: 680px){
+
+  .modal-header-text {
+    font-size: 18px;
+  }
+
+  .modal-parapraph {
+    margin: 0;
+  }
+}

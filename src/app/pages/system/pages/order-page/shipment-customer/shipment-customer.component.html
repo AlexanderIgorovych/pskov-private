@@ -1,0 +1,25 @@
+<div class="container">
+  <mat-card class='block-order'>
+    <mat-horizontal-stepper
+      #stepper
+      class="stepp-shipm"
+    >
+    <mat-step label="Тип машины">
+      <app-car (nextStep)="nextStep()" [typeComponent]="'modified'"></app-car>
+    </mat-step>
+    <mat-step label="Документы">
+      <app-customer-documents (weighNext)="nextToWeigh($event)"></app-customer-documents>
+    </mat-step>
+
+    </mat-horizontal-stepper>
+    <div class="back-block">
+      <button
+        class="back-step"
+        (click)="previousStep()"
+        *ngIf="stepper.selectedIndex"
+      >
+        <img src="assets/Shapeback.png" alt="" /> <span>Назад</span>
+      </button>
+    </div>
+  </mat-card>
+</div>

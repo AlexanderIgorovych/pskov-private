@@ -1,0 +1,22 @@
+<div class="modal position:top">
+  <div class="modal-text">
+    <h2 mat-dialog-title>
+      Вы уверены, что хотите перейти к взвешиванию
+следющего контейнера?
+    </h2>
+    <p mat-dialog-content class="text modal-parapraph">
+      В случае ошибки вы сможете переназначить взвешивания с одного
+контейнера на другой.
+    </p>
+  </div>
+  <div mat-dialog-actions class="modal-actions">
+    <div class="action-row">
+      <button (click)="close()" mat-button cdkFocusInitial>ОТМЕНА</button>
+    </div>
+    <div class="action-row">
+      <button (click)="confirm()" class="cancel" mat-button>
+        ПЕРЕЙТИ
+      </button>
+    </div>
+  </div>
+</div>
