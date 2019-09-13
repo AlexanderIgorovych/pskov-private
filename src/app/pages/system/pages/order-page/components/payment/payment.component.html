@@ -1,0 +1,66 @@
+<div class="payment-picker">
+  <app-type-picker
+    *ngIf="subpageData < 2"
+    [title]="tabTitle"
+    [tabs]="tabs"
+    class='picker'
+    (pick)="onTypeSelect($event)"
+  ></app-type-picker>
+</div>
+<app-cash
+  [requestedPay]="cacheState"
+  (requestPay)="requestPay()"
+  *ngIf="(pickedTab | async) === 0"
+></app-cash>
+<app-client-card
+  [isCardExist]="isCardExistError"
+  [isConfirmed]="isReadyClient"
+  (resetValue)="isReadyClient = false"
+  (isReadyNext)="isReadyClientHandle()"
+  [cards]="partnerCards | async"
+  [state]="confirmed | async"
+  *ngIf="(pickedTab | async) === 1"
+  (sendData)="sendPhotos($event)"
+  (newCardAdded)="addNewCard($event)"
+></app-client-card>
+<app-qiwi-card
+  (disableBtnEvent)="declareDisable($event)"
+  (nextStepHandle)="next()"
+  (subpageChangeLocal)="handleSubpageLocal($event)"
+  (resultOfVer)="handleResultsVerif($event)"
+  [subpage]="subpageData"
+  (pickedCardsValue)="handleCard($event)"
+  *ngIf="(pickedTab | async) === 2">
+</app-qiwi-card>
+
+
+<div class="modal-stepper-footer row" *ngIf="(pickedTab | async) !== undefined">
+  <button
+    *ngIf="(pickedTab | async) === 0"
+    (click)="next()"
+    [disabled]="!cacheState"
+    color="none"
+    class="button button-primary btn-choosed-client"
+  >
+    ПРОДОЛЖИТЬ
+  </button>
+  <button
+    *ngIf="(pickedTab | async) === 1 "
+    (click)="next()"
+    [disabled]="!isReadyClient"
+    color="none"
+    class="button button-primary btn-choosed-client"
+  >
+    ПРОДОЛЖИТЬ
+  </button>
+  <button
+    *ngIf="(pickedTab | async) === 2 && subpageData == 0"
+    (click)="next()"
+    [disabled]="!cardsValueBool"
+    color="none"
+    class="button button-primary btn-choosed-client"
+  >
+    ПРОДОЛЖИТЬ
+  </button>
+
+</div>

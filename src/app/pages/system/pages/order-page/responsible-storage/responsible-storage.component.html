@@ -1,0 +1,16 @@
+<div class="container">
+  <mat-card class="block-order">
+    <mat-horizontal-stepper
+      #stepper class="stepp-shipm">
+      <mat-step label="Причина">
+        <app-reason-component (nextStep)="next()"></app-reason-component>
+      </mat-step>
+      <mat-step label="Контрагент">
+        <app-partner (nextStep)="next()"></app-partner>
+      </mat-step>
+      <mat-step label="Тип машины">
+        <app-car [typeComponent]="'default'" (nextStep)="next()"> </app-car>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </mat-card>
+</div>

@@ -1,0 +1,172 @@
+<div id="weigh-wrapper" class="new-weight-wrapper">
+  <div class="detect-weight">
+    <div class='edit-weigh-header' *ngIf="editMode.allow">
+      РЕДАКТИРОВАНИЕ ВЗВЕШИВАНИЯ
+    </div>
+    <!-- Header with choose section -->
+    <div *ngIf="tableType === 0 && !editMode.allow" class="choose-weight-radio">
+      <p>ВЫБЕРИТЕ ВЗВЕШИВАНИЕ</p>
+      <!-- Radio button form here -->
+        <div class="row">
+          <p><label><input checked="valueChecked === 0" value='scrap' (click)="handleChoosedWeigh($event)" name='type-weight' type="radio"><span></span></label>ЛОМ</p>
+          <p><label><input value='tare'  (click)="handleChoosedWeigh($event)" name='type-weight' type="radio"><span></span></label>ТАРА</p>
+        </div>
+    </div>
+
+
+    <div class="choose-scales">
+      <!-- This block display in any condition. But Some ELEMENTS CHANGES INSIDE -->
+      <form *ngIf="!editMode.allow" [formGroup]="formWeigh" (ngSubmit)="updateTableDataFirst()">
+
+        <div class='scales-form'>
+            <p class='choose-weigh-title'>ВЫБЕРИТЕ ВЕСЫ</p>
+
+            <div class="input-scale">
+
+              <mat-select class='select-scale' placeholder="Весы не выбраны" class="input-main" formControlName="choosedWeigh">
+
+                <mat-option *ngFor="let weight of displayWeighList" value="{{ weight.id }}">
+                  {{ weight.name }}
+                </mat-option>
+
+              </mat-select>
+            </div>
+
+            <p *ngIf="valueChecked === 1">ВЫБЕРИТЕ ТАРУ</p>
+
+            <div class="input-scale">
+              <mat-select *ngIf="valueChecked === 1" class='select-scale' placeholder="Тара не выбрана" class="input-main" formControlName="tare">
+
+                <mat-option *ngFor="let tare of displayTares" value="{{ tare }}">
+                  {{ tare }}
+                </mat-option>
+
+              </mat-select>
+            </div>
+
+
+            <div class="row">
+              <div>
+                <p>ВЕС</p>
+                <div class="row-cont">
+                    <input
+                      [readonly]="!isEditAllow"
+                      formControlName='weigh'
+                      placeholder="0.00"
+                      class='weight-enter'
+                      type="text">
+                    <button
+                      (click)="getCurrentWeigh()"
+                      type='button'
+                      [disabled]="valueChecked === 0 ? weighChoosed.value === null || weighValue !== null : tareValue === null || weighChoosed.value === null"
+                      class='weight-action'>ВЗВЕСИТЬ
+                    </button>
+                </div>
+                <button
+                  [disabled]="pickedWeighter ? pickedWeighter.manual_weighing !== false : true || sendedWeigh"
+                  (click)="onEditChange()"
+                  type='button'
+                  class='edit-weigh'>
+                  РЕДАКТИРОВАТЬ
+                </button>
+              </div>
+            </div>
+
+        </div>
+
+        <div class="footer-scales-form">
+          <button
+            type='submit'
+            [disabled]="formWeigh.invalid || sendedWeigh"
+            class='weight-fixed'>
+            ЗАФИКСИРОВАТЬ ВЕС
+          </button>
+        </div>
+
+      </form>
+
+    </div>
+
+    <!-- Displays while condition equals zero -->
+    <div class="weight-scrap-body" *ngIf="valueChecked === 0 || (valueChecked === 1 && editMode.isTare)">
+      <div class="detect-kind-activity">
+        <form [formGroup]="scrapsForm">
+          <p *ngIf="editMode.allow && tableType === 0">ВЫБЕРИТЕ МАШИНУ</p>
+
+          <mat-select *ngIf="editMode.allow && tableType === 0" formControlName="car" class='select-scale' placeholder="Выберите машину" class="input-main">
+
+            <mat-option *ngFor="let car of carsList" value="{{ car.brand }}">
+              {{ car.brand }}
+            </mat-option>
+
+          </mat-select>
+
+          <p *ngIf="editMode.allow && tableType === 1">ВЫБЕРИТЕ ИМЯ МАСТЕРА-РЕЗЧИКА</p>
+          <mat-select *ngIf="editMode.allow && tableType === 1" formControlName="cutter" class='select-scale' placeholder="Резчик не указан" class="input-main">
+
+            <mat-option *ngFor="let cutter of cuttersList" value="{{ cutter.id }}">
+              {{ cutter.name }}
+            </mat-option>
+
+          </mat-select>
+
+          <p>ВЫБЕРИТЕ ВИД ДЕЯТЕЛЬНОСТИ</p>
+          <mat-select (ngModelChange)="!editMode.allow && !isTare ? handleChangeInputs(actType) : null" #actType formControlName="actType" class='select-scale' placeholder="Вид деятельности не указан" class="input-main">
+
+            <mat-option *ngFor="let type of displayTypeAction" value="{{ type }}">
+              {{ type }}
+            </mat-option>
+
+          </mat-select>
+          <p>ВЫБЕРИТЕ ВИД ЛОМА</p>
+          <mat-select (ngModelChange)="!editMode.allow ? handleChangeInputs(typeScrap) : null" #typeScrap formControlName="typeScrap" class='select-scale' placeholder="Вид лома не указан" class="input-main">
+
+            <mat-option *ngFor="let scrap of displayScraps" value="{{ scrap }}">
+              <p>{{ scrap }}</p>
+            </mat-option>
+
+          </mat-select>
+
+          <div class="type-check">
+            <div class="amount-bigbag">
+              <p>КОЛ-ВО БИГ-БЭГОВ</p>
+
+              <mat-select (ngModelChange)="!editMode.allow ? handleChangeInputs(bigbag) : null" #bigbag formControlName="bigbag" class='select-scale' placeholder="Кол-во не указано" class="input-main">
+
+                <mat-option *ngFor="let count of displayAmountBigs" value="{{ count }}">
+                  {{ count }}
+                </mat-option>
+
+              </mat-select>
+
+            </div>
+            <div class="type-bigbag">
+              <p>ТИП БИГ-БЭГОВ</p>
+
+              <mat-select (ngModelChange)="!editMode.allow ? handleChangeInputs(typeBigbag) : null" #typeBigbag formControlName="typeBigbag" class='select-scale' placeholder="Тип не указан" class="input-main">
+
+                <mat-option *ngFor="let type of displayListBigsList" value="{{ type.id }}">
+                  {{ type.name }}
+                </mat-option>
+
+              </mat-select>
+            </div>
+          </div>
+
+          <div *ngIf="editMode.allow" class="btn-edit-block">
+            <button (click)="setIntialMode()" type='button' class='decline-edit'>ОТМЕНИТЬ</button>
+            <button
+              [disabled]="(scrapsForm.invalid && carValue !== null) || (scrapsForm.invalid && cutterValue == null)"
+              (click)="submitEditScrap(editMode.id, editMode.tableName)"
+              type='submit'
+              class='submit-edit'>
+                СОХРАНИТЬ
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+</div>

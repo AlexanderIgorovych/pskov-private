@@ -1,0 +1,429 @@
+$green   : #109754;
+$silver  : #CECDCD;
+$bgLight : rgba(216, 216, 216, 0.143003);
+
+@mixin textChoose {
+  padding: 0;
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  color: #293B5A;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+@mixin btnScale {
+  border-radius: 2px;
+  background-color: $green;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2), 0px 2px 2px rgba(0, 0, 0, 0.12), 0px 0px 2px rgba(0, 0, 0, 0.14);
+  color: #FFF;
+  font-weight: 500;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+}
+
+@mixin declinedBtn {
+  background-color: #FFF;
+  border: 1px solid #CECDCD;
+  border-radius: 2px;
+  color: #CECDCD;
+  font-weight: 500;
+  font-size: 14px;
+  font-family: 'Roboto', sans-serif;
+}
+
+// Styles Start
+
+.new-weight-wrapper {
+  width: 544px;
+  margin-left: 30px;
+  margin-top: 30px;
+  margin-bottom: 20px;
+
+  .detect-weight {
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.14);
+    border-radius: 2px;
+
+    .edit-weigh-header {
+      font-family: 'Roboto', sans-serif;
+      font-size: 18px;
+      color: #fff;
+      font-weight: 500;
+      max-width: 544px;
+      background-color: $green;
+      padding: 25px 50px;
+    }
+  }
+
+  .input-scale {
+    width: 440px;
+    margin-top: 11px;
+  }
+
+  p {
+    @include textChoose;
+  }
+
+  .choose-weight-radio {
+    height: 110px;
+    padding: 25px 15px 20px;
+    padding-left: 50px;
+    background-color: $bgLight;
+
+    p:not(:first-child){
+      margin-left: 70px;
+    }
+
+    p {
+      margin-top: 20px;
+    }
+
+    input {
+      display: none;
+      transition: all .2s;
+    }
+
+    label {
+      position: relative;
+      transition: all .2s;
+    }
+
+    label:before {
+      content: '';
+      display: inline-block;
+      position: relative;
+      top: 5px;
+      margin: 0 5px 0 0;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 2px solid #293B5A;
+      background-color: transparent;
+    }
+
+
+    label input[type='radio']:checked + span {
+      transition: all .2s;
+      border-radius: 50%;
+      width: 16px;
+      height: 16px;
+      position: absolute;
+      top: 0px;
+      left: 4px;
+      display: block;
+      background-color: $green;
+    }
+  }
+
+  .scales-form {
+    padding-left: 50px;
+
+    p:not(.choose-weigh-title) {
+      margin-top: 25px;
+    }
+
+    .choose-weigh-title {
+      padding-top: 25px;
+    }
+
+    .row-cont {
+      display: flex;
+    }
+
+    .edit-weigh {
+      border: none;
+      font-family: 'Roboto', sans-serif;
+      background-color: white;
+      color: $green;
+      margin-top: 5px;
+    }
+
+    .edit-weigh:disabled {
+      color: #bab9b9;
+      background-color: white;
+    }
+
+    .weight-action {
+      @include btnScale;
+      width: 180px;
+      height: 36px;
+      margin-left: 115px;
+      border: none;
+      margin-top: 10px;
+    }
+
+    .weight-fixed {
+      @include btnScale;
+      width: 276px;
+      height: 36px;
+      border: none;
+    }
+
+    button:disabled {
+      background-color: $silver;
+    }
+
+    .weight-enter {
+      margin-top: 11px;
+      width: 110px;
+      height: 48px;
+      border: 1px solid #949DAD;
+      background-color: $bgLight;
+      color: #293B5A;
+      font-size: 26px;
+      opacity: 0.6;
+      font-family: 'Roboto', sans-serif;
+      padding-left: 27px;
+    }
+  }
+  .footer-scales-form {
+    margin-top: 26px;
+    padding: 23px;
+    display: flex;
+    justify-content: center;
+    border-top: 1px solid rgba(47, 74, 105, 0.1);
+
+    .weight-fixed {
+      @include btnScale;
+      width: 276px;
+      height: 36px;
+      border: none;
+    }
+
+    button:disabled {
+      background-color: $silver;
+    }
+  }
+
+  .detect-kind-activity {
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.14);
+    border-radius: 2px;
+    margin-top: 4px;
+    padding-left: 50px;
+    padding-top: 26px;
+    padding-right: 82px;
+
+    p {
+      margin-bottom: 11px;
+    }
+
+    p:not(:first-child){
+      margin-top: 31px;
+    }
+
+    .type-check {
+      margin-top: 31px;
+      display: flex;
+
+      .amount-bigbag {
+        width: 168px;
+        padding-bottom: 36px;
+      }
+
+      .type-bigbag {
+        width: 204px;
+        margin-left: 41px;
+      }
+    }
+
+    .btn-edit-block {
+      border-top: 2px solid rgba(47, 74, 105, 0.1);
+      width: 100%;
+      display: flex;
+      padding: 24px;
+
+      .submit-edit {
+        @include btnScale;
+        width: 180px;
+        height: 36px;
+        margin-left: 54px;
+        border: none;
+        cursor: pointer;
+      }
+
+      .submit-edit:disabled {
+        background-color: $silver;
+      }
+
+      .decline-edit {
+        @include declinedBtn;
+        border: 1px solid $green;
+        color: $green;
+        width: 180px;
+        cursor: pointer;
+        height: 36px;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 320px) and (max-width: 568px) {
+
+  .new-weight-wrapper {
+    padding: 0;
+    margin: 0;
+    width: 360px;
+
+    p {
+      font-size: 14px;
+    }
+
+    .choose-weight-radio {
+      p {
+        font-size: 16px;
+      }
+    }
+
+    .detect-weight {
+      width: 350px;
+    }
+
+    .detect-kind-activity {
+      padding: 12px 22px;
+      padding-right: 47px;
+      margin: 0;
+      width: 240px;
+
+      .type-check {
+        display: flex;
+        flex-direction: column;
+        padding-top: 10px;
+        margin-top: 14px;
+
+        .amount-bigbag {
+          padding-bottom: 0;
+          margin-bottom: 0;
+          width: 150px;
+        }
+
+        .type-bigbag {
+          padding: 0;
+          margin: 0;
+          margin-top: 19px;
+          width: 150px;
+        }
+      }
+    }
+
+    .choose-weight-radio {
+      padding: 12px 24px;
+      width: 300px;
+      margin: 0;
+    }
+
+    .scales-form {
+      padding: 10px 12px;
+
+      p {
+        margin: 0;
+        padding: 0;
+      }
+
+      .input-scale {
+        width: 258px;
+      }
+
+      .weight-action {
+        margin-left: 10px;
+        width: 110px;
+        margin-top: 22px;
+      }
+    }
+
+    .footer-scales-form {
+      width: 300px;
+
+      .weight-fixed {
+        width: 180px;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 360px) and (max-width: 640px) {
+  .new-weight-wrapper {
+    padding: 0;
+    margin: 0;
+    width: 300px;
+
+    .detect-kind-activity {
+      padding: 12px 22px;
+      padding-right: 47px;
+      margin: 0;
+      width: 310px;
+    }
+
+    .choose-weight-radio {
+      padding: 12px 24px;
+      margin: 0;
+    }
+
+    .scales-form {
+      padding: 10px 12px;
+      width: 300px;
+
+      p {
+        margin: 0;
+        padding: 0;
+      }
+
+      .input-scale {
+        width: 320px;
+      }
+
+      .weight-action {
+        margin-left: 30px;
+        width: 110px;
+        margin-top: 22px;
+      }
+    }
+  }
+
+  .footer-scales-form {
+    width: 250px;
+  }
+}
+
+
+@media only screen and (min-width: 375px) and (max-width: 667px)  {
+  .new-weight-wrapper {
+    padding: 0;
+    margin: 0;
+    width: 300px;
+
+    .detect-kind-activity {
+      padding: 12px 22px;
+      padding-right: 47px;
+      margin: 0;
+      width: 310px;
+    }
+
+    .choose-weight-radio {
+      padding: 12px 24px;
+      margin: 0;
+    }
+
+    .scales-form {
+      padding: 10px 12px;
+      width: 300px;
+
+      p {
+        margin: 0;
+        padding: 0;
+      }
+
+      .input-scale {
+        width: 320px;
+      }
+
+      .weight-action {
+        margin-left: 30px;
+        width: 110px;
+        margin-top: 22px;
+      }
+    }
+  }
+
+  .footer-scales-form {
+    width: 320px;
+  }
+}

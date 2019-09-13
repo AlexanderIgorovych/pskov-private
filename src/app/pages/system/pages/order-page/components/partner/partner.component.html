@@ -1,0 +1,76 @@
+<div class="step partner">
+  <app-form-card [title]="'ПРОВЕРКА КОНТРАГЕНТА'">
+    <form [formGroup]="form" body>
+      <!-- autoSuggested -->
+      <div class="auto-input">
+        <app-autosuggets
+          [data]="autoSuggested | async"
+          (changes)="autoSuggestChange($event)"
+          (picked)="setPicketSuggestion($event)"
+          [inputFormControl]="identifier"
+          [placeholder]="emptyParnerPlaceholder"
+        >
+          <div
+            *ngIf="
+              identifier.touched &&
+              (!!identifier.errors?.required ||
+                !!identifier.errors?.cannotContainSpace)
+            "
+            error
+            class="input-error"
+          >
+            Обязательное поле
+          </div>
+          <div *ngIf="!!identifier.errors?.async" error class="input-error">
+            Контрагент не найден
+          </div>
+
+          <button
+            (click)="checkPartner(identifier.value)"
+            input-control
+            [attr.disabled]="(isCheckButtonDisables | async) ? null : true"
+            class="input-check-button"
+          >
+            ПРОВЕРИТЬ
+          </button>
+        </app-autosuggets>
+      </div>
+      <div class="step-result" *ngIf="(isPartnerInfoVisible | async)">
+        <ng-container *ngIf="(pickedPartner | async) as partner">
+          <div class="step-result-body">
+            <mat-icon
+              class="step-result-icon"
+              [ngClass]="{ 'step-result-icon--error': partner.blocked }"
+              >{{ partner.blocked ? 'report' : 'done' }}</mat-icon
+            >
+            <span class="step-result-text">{{ partner.name }}</span>
+          </div>
+          <div>
+            <span class="step-result-error" *ngIf="partner.blocked">
+              Работа с данным контрагентом запрещена
+            </span>
+          </div>
+          <span *ngIf="(isPickedPartnerForbidden | async) && !partner.blocked" class='input-error'>Данный партнер не подтвержден оператором.</span>
+        </ng-container>
+      </div>
+    </form>
+    <div class="step-footer" footer>
+      <button
+        (click)="openAddPartnerDialog()"
+        mat-button
+        class="step-button step-button-add"
+      >
+        <div class="step-button-icon"><mat-icon>add_circle</mat-icon></div>
+        <span> ДОБАВИТЬ НОВОГО КОНТРАГЕНТА</span>
+      </button>
+
+      <button
+        (click)="setNextStep()"
+        [disabled]="(isPickedPartnerForbidden | async) === false ? null : true"
+        class="btn-next"
+      >
+        ПРОДОЛЖИТЬ
+      </button>
+    </div>
+  </app-form-card>
+</div>

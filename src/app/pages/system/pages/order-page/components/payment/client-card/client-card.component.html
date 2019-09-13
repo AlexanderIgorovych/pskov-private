@@ -1,0 +1,49 @@
+<div class="creator-block" *ngIf="state === 1">
+  <app-add-card-photo
+    (handleBack)="state = 0"
+    [isExistError]="isCardExist"
+    [isClientReady]="isConfirmed"
+    [photos]="photos"
+    [arePhotosFilled]="arePhotosFilled"
+    (addedPhoto)="addPhoto($event)"
+    (deletedPhoto)="deletePhoto($event)"
+    (requestedOperator)="sendRequest()"
+  ></app-add-card-photo>
+</div>
+<div class="choose-client-card">
+  <ng-container body *ngIf="state === 0">
+    <app-form-card [title]="'ВЫБЕРИТЕ КАРТУ КЛИЕНТА'">
+      <ng-container body>
+        <form [formGroup]="cardForm">
+          <mat-select
+            formControlName="card"
+            (selectionChange)="pickPartnerCard($event)"
+            class="input-main"
+            placeholder="Выберите карту"
+          >
+            <mat-option *ngFor="let item of cards" value="{{ item.id }}">{{
+              item.number
+            }}</mat-option>
+          </mat-select>
+        </form>
+      </ng-container>
+      <div class="step-footer" footer>
+        <button
+          (click)="onHandleChangePage(1)"
+          class="button-add-card-hover">
+          <div class="step-button-icon"><mat-icon>add_circle</mat-icon></div>
+          <span>ДОБАВИТЬ КАРТУ</span>
+        </button>
+
+        <button
+          [disabled]="cardForm.invalid || isReadyToNext"
+          (click)="sendCardRequest()"
+          class="step-btn-client"
+        >
+          <span class='mobile-phone-block'>ВЫБРАТЬ НОМЕР</span>
+          <span class='desktop-block-content'>ОТПРАВИТЬ ЗАПРОС</span>
+        </button>
+      </div>
+    </app-form-card>
+  </ng-container>
+</div>

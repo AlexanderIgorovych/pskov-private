@@ -1,0 +1,375 @@
+<div class="step">
+  <app-type-picker
+    *ngIf="typeComponent === 'default'"
+    [title]="tabTitle"
+    [tabs]="tabs"
+    (pick)="onChangeCarType($event)"
+  ></app-type-picker>
+  <app-type-picker
+    *ngIf="typeComponent === 'modified'"
+    [title]="tabTitle"
+    [tabs]="tabsModified"
+    (pick)="onChangeCarType($event)"
+  ></app-type-picker>
+
+  <!-- 0 -->
+
+  <app-form-card
+    class='form-card'
+    *ngIf="car && car.own_type === 2"
+    [isStep]="false"
+    [title]="'ЗАПОЛНИТЕ ИНФОРМАЦИЮ О МАШИНЕ'">
+    
+    <ng-container body>
+      <form [formGroup]="form1">
+        <div class="creator-block-content creator-block-with_footer">
+          <app-autosuggets
+            [data]="autoSuggested | async"
+            (changes)="searchForCar($event)"
+            (picked)="setPicketSuggestion($event)"
+            [inputFormControl]="form1Plate"
+            [placeholder]="emptyCarPlaceholder"
+          >
+            <div input-control>
+              <button
+                [disabled]="(pickedCar | async) ? null : true"
+                (click)="checkCar()"
+                class="input-check-button"
+              >
+                ПРОВЕРИТЬ
+              </button>
+            </div>
+            <div *ngIf="errorMess" error class="l-error--extended">
+              <div
+                *ngIf="form1Plate?.touched && !!form1Plate?.errors?.required"
+                class="input-error"
+              >
+                Обязательное поле
+              </div>
+              <div *ngIf="!!form1Plate?.errors?.async" class="input-error">
+                Машина не найдена
+              </div>
+            </div>
+          </app-autosuggets>
+          <div
+            class="step-result"
+            *ngIf="(isPickedCarForbidden | async) !== undefined"
+          >
+            <ng-container *ngIf="(pickedCar | async) as car">
+              <div class="step-result-body">
+                <mat-icon
+                  class="step-result-icon"
+                  [ngClass]="{ 'step-result-icon--error': car.blocked }"
+                  >{{ car?.blocked ? 'report' : 'done' }}</mat-icon
+                >
+                <span class="step-result-text">{{ car?.brand }}</span>
+              </div>
+              <div>
+                <span class="step-result-error" *ngIf="car?.blocked"
+                  >Работа с данной машиной запрещена</span
+                >
+              </div>
+            </ng-container>
+          </div>
+
+          <div class="modified l-track-wrapper">
+            <app-autosuggets
+              [data]="autoSuggestedTrailers | async"
+              (changes)="searchForTrailer($event)"
+              (picked)="setPicketTrailerSuggestion($event)"
+              [inputFormControl]="form1Trailer"
+              [placeholder]="emptyTralierPlaceholder"
+            >
+              <div input-control>
+                <button
+                  [disabled]="
+                    (autoSuggestedTrailerPicked | async) ? null : true
+                  "
+                  (click)="checkTrailer()"
+                  class="input-check-button"
+                >
+                  ПРОВЕРИТЬ
+                </button>
+              </div>
+              <div *ngIf="errorMess" error class="l-error--extended">
+                <div
+                  *ngIf="
+                    form1Trailer?.touched && !!form1Trailer?.errors?.required
+                  "
+                  class="input-error"
+                >
+                  Обязательное поле
+                </div>
+                <div *ngIf="!!form1Trailer?.errors?.async" class="input-error">
+                  Прицеп не найден
+                </div>
+              </div>
+            </app-autosuggets>
+            <div
+              class="step-result"
+              *ngIf="(isPickedTrailerForbidden | async) !== undefined"
+            >
+              <ng-container
+                *ngIf="(autoSuggestedTrailerPicked | async) as trailer"
+              >
+                <div class="step-result-body">
+                  <mat-icon
+                    class="step-result-icon"
+                    [ngClass]="{ 'step-result-icon--error': trailer.blocked }"
+                    >{{ trailer?.blocked ? 'report' : 'done' }}</mat-icon
+                  >
+                  <span class="step-result-text">{{ trailer?.brand }}</span>
+                </div>
+                <div>
+                  <span class="step-result-error" *ngIf="trailer?.blocked"
+                    >Работа с данным прицепом запрещена</span
+                  >
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </form>
+    </ng-container>
+    <ng-container footer>
+      <div class="creator-block-footer row">
+        <button
+          (click)="notifyNextStep()"
+          mat-flat-button
+          class="button button-primary btn-next-first"
+          type="submit"
+          color="none"
+          [disabled]="(isPickedTrailerForbidden | async) !== undefined ? (isPickedCarForbidden | async) !== false || (isPickedTrailerForbidden | async) !== false : (isPickedCarForbidden | async) !== false"
+        >
+          ПРОДОЛЖИТЬ
+        </button>
+      </div>
+    </ng-container>
+  </app-form-card>
+
+  <!-- 1 -->
+  <app-form-card
+    *ngIf="typeComponent === 'default' ? car && car.own_type === 0 : null"
+    [isStep]="false"
+    [title]="'ЗАПОЛНИТЕ ИНФОРМАЦИЮ О МАШИНЕ'"
+  >
+    <ng-container body>
+      <form [formGroup]="form1">
+        <div class="creator-block-content creator-block-with_footer">
+          <app-autosuggets
+            [data]="autoSuggested | async"
+            (changes)="searchForCar($event)"
+            (picked)="setPicketSuggestion($event)"
+            [inputFormControl]="form1Plate"
+            [placeholder]="emptyCarPlaceholder"
+          >
+            <div input-control>
+              <button
+                input-control
+                [attr.disabled]="(pickedCar | async) ? null : true"
+                (click)="checkCar()"
+                class="input-check-button"
+              >
+                ПРОВЕРИТЬ
+              </button>
+            </div>
+
+            <div *ngIf="errorMess" error class="l-error--extended">
+              <div
+                *ngIf="form1Plate?.touched && !!form1Plate?.errors?.required"
+                class="input-error"
+              >
+                Обязательное поле
+              </div>
+              <div *ngIf="!!form1Plate?.errors?.async" class="input-error">
+                Машина не найдена
+              </div>
+            </div>
+          </app-autosuggets>
+          <div
+            class="step-result"
+            *ngIf="(isPickedCarForbidden | async) !== undefined"
+          >
+            <ng-container *ngIf="(pickedCar | async) as car">
+              <div class="step-result-body">
+                <mat-icon
+                  class="step-result-icon"
+                  [ngClass]="{ 'step-result-icon--error': car.blocked }"
+                  >{{ car?.blocked ? 'report' : 'done' }}</mat-icon
+                >
+                <span class="step-result-text">{{ car?.brand }}</span>
+              </div>
+              <div>
+                <span class="step-result-error" *ngIf="car?.blocked"
+                  >Работа с данной машиной запрещена</span
+                >
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </form>
+    </ng-container>
+    <ng-container footer>
+      <div class="creator-block-footer row between">
+        <button
+          class="step-button step-button-add"
+          (click)="openDialog()"
+        >
+          <div class="step-button-icon"><mat-icon>add_circle</mat-icon></div>
+          <span> ДОБАВИТЬ МАШИНУ</span>
+        </button>
+        <button
+          (click)="notifyNextStep()"
+          mat-flat-button
+          class="button button-primary"
+          type="submit"
+          color="none"
+          [disabled]="(isPickedCarForbidden | async) !== false"
+        >
+          ПРОДОЛЖИТЬ
+        </button>
+      </div>
+    </ng-container>
+  </app-form-card>
+
+  <!--  2  -->
+
+  <app-form-card
+    *ngIf="typeComponent === 'default' ? car && car.own_type === 1 : car && car.own_type === 1"
+    [isStep]="false"
+    [title]="'ЗАПОЛНИТЕ ИНФОРМАЦИЮ О МАШИНЕ'"
+  >
+    <ng-container body>
+      <form [formGroup]="form1">
+        <div class="creator-block-content creator-block-with_footer">
+          <app-autosuggets
+            [data]="autoSuggested | async"
+            (changes)="searchForCar($event)"
+            (picked)="setPicketSuggestion($event)"
+            [inputFormControl]="form1Plate"
+            [placeholder]="emptyCarPlaceholder"
+          >
+            <div input-control>
+              <button
+                [disabled]="(pickedCar | async) ? null : true"
+                (click)="checkCar()"
+                class="input-check-button"
+              >
+                ПРОВЕРИТЬ
+              </button>
+            </div>
+
+            <div *ngIf="errorMess" error class="l-error--extended">
+              <div
+                *ngIf="form1Plate?.touched && !!form1Plate?.errors?.required"
+                class="input-error"
+              >
+                Обязательное поле
+              </div>
+              <div *ngIf="!!form1Plate?.errors?.async" class="input-error">
+                Машина не найдена
+              </div>
+            </div>
+          </app-autosuggets>
+          <div
+            class="step-result"
+            *ngIf="(isPickedCarForbidden | async) !== undefined"
+          >
+            <ng-container *ngIf="(pickedCar | async) as car">
+              <div class="step-result-body">
+                <mat-icon
+                  class="step-result-icon"
+                  [ngClass]="{ 'step-result-icon--error': car.blocked }"
+                  >{{ car?.blocked ? 'report' : 'done' }}</mat-icon
+                >
+                <span class="step-result-text">{{ car?.brand }}</span>
+              </div>
+              <div>
+                <span class="step-result-error" *ngIf="car?.blocked"
+                  >Работа с данной машиной запрещена</span
+                >
+              </div>
+            </ng-container>
+          </div>
+          <div class="modified">
+            <app-autosuggets
+              [data]="autoSuggestedTrailers | async"
+              (changes)="searchForTrailer($event)"
+              (picked)="setPicketTrailerSuggestion($event)"
+              [inputFormControl]="form1Trailer"
+              [placeholder]="emptyTralierPlaceholder"
+            >
+              <div input-control>
+                <button
+                  [disabled]="(autoSuggestedTrailerPicked | async) ? null : true"
+                  (click)="checkTrailer()"
+                  class="input-check-button"
+                >
+                  ПРОВЕРИТЬ
+                </button>
+              </div>
+              <div *ngIf="errorMess" error class="l-error--extended">
+                <div
+                  *ngIf="
+                    form1Trailer?.touched && !!form1Trailer?.errors?.required
+                  "
+                  class="input-error"
+                >
+                  Обязательное поле
+                </div>
+                <div *ngIf="!!form1Trailer?.errors?.async" class="input-error">
+                  Прицеп не найден
+                </div>
+              </div>
+            </app-autosuggets>
+          <div
+            class="step-result"
+            *ngIf="(isPickedTrailerForbidden | async) !== undefined"
+          >
+            <ng-container
+              *ngIf="(autoSuggestedTrailerPicked | async) as trailer"
+            >
+              <div class="step-result-body">
+                <mat-icon
+                  class="step-result-icon"
+                  [ngClass]="{ 'step-result-icon--error': trailer.blocked }"
+                  >{{ trailer?.blocked ? 'report' : 'done' }}</mat-icon
+                >
+                <span class="step-result-text">{{ trailer?.brand }}</span>
+              </div>
+              <div>
+                <span class="step-result-error" *ngIf="trailer?.blocked"
+                  >Работа с данным прицепом запрещена</span
+                >
+              </div>
+            </ng-container>
+          </div>
+        </div>
+        </div>
+      </form>
+    </ng-container>
+    <ng-container footer>
+      <div class="creator-block-footer row between">
+        <button
+          class="step-button step-button-add btn-add-mob"
+          (click)="openDialog()"
+        >
+          <div class="step-button-icon"><mat-icon>add_circle</mat-icon></div>
+          <span>ДОБАВИТЬ МАШИНУ</span>
+        </button>
+        <button
+          (click)="notifyNextStep()"
+          mat-flat-button
+          class="button button-primary"
+          type="submit"
+          color="none"
+          [disabled]="(isPickedTrailerForbidden | async) !== undefined ? (isPickedCarForbidden | async) !== false || (isPickedTrailerForbidden | async) !== false : (isPickedCarForbidden | async) !== false"
+        >
+          ПРОДОЛЖИТЬ
+        </button>
+      </div>
+    </ng-container>
+  </app-form-card>
+
+
+</div>

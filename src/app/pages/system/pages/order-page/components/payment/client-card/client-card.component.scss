@@ -1,0 +1,151 @@
+$green : #109754;
+
+span:not(.step-button-add span) {
+  color: #fff;
+}
+.photo-container {
+  max-width: 605px;
+  position: relative;
+}
+
+.choose-client-card {
+  ::ng-deep .creator-block {
+    min-height: auto;
+    height: 230px;
+    margin: 0;
+  }
+
+  ::ng-deep .step-body {
+    padding: 10px;
+    min-height: 100px;
+  }
+}
+
+.step-footer {
+
+  button {
+    height: 36px;
+  }
+
+  .button-add-card-hover:nth-child(1){
+    background-color: transparent;
+    width: default;
+    border: none;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    height: 38px;
+    color: $green;
+    text-align: left;
+    transition: all .2s;
+  }
+
+  .button-add-card-hover:nth-child(1):hover {
+    background-color: rgba(0, 0, 0, .1);
+    transition: all .2s;
+  }
+
+  button.step-btn-client {
+    border: none;
+    background-color: $green;
+    border-radius: 2px;
+    font-size: 14px;
+    color: #fff;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    height: 36px;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2), 0px 2px 2px rgba(0, 0, 0, 0.12), 0px 0px 2px rgba(0, 0, 0, 0.14);
+  }
+
+  button.step-btn-client:disabled {
+    background-color: #CECDCD;
+  }
+
+  button:nth-child(2):hover {
+    color: #fff;
+  }
+
+  span {
+    position: relative;
+    width: 150px;
+    padding: 0;
+    margin: 0;
+  }
+}
+
+@media (min-width: 0) and (max-width: 320px){
+
+  .choose-client-card {
+    width: 260px;
+  }
+
+  .step-button-icon {
+    display: none;
+  }
+
+  .step-footer {
+
+    button.step-button-add {
+      width: 100px;
+      margin-right: 0;
+
+      span {
+        font-size: 12px;
+      }
+    }
+
+    button.step-btn-client {
+      min-width: 140px;
+      font-size: 13px;
+      margin-left: 0;
+      margin-right: 40px;
+    }
+  }
+
+  ::ng-deep .creator-block {
+    width: 260px;
+    min-width: 0;
+    max-width: 260px;
+    margin-right: 20px;
+  }
+}
+
+
+@media (min-width: 321px) and (max-width: 700px) {
+
+  .choose-client-card {
+    ::ng-deep {
+      .creator-block {
+        min-width: 330px;
+      }
+    }
+  }
+
+  .step-button-icon {
+    display: none;
+  }
+
+  .step-footer {
+
+    button.step-button-add {
+      width: 100px;
+
+      span {
+        font-size: 12px;
+      }
+    }
+
+    button.step-btn-client {
+      width: 200px;
+      font-size: 12px;
+    }
+  }
+
+  ::ng-deep .creator-block {
+    width: 320px;
+    min-width: 0;
+    max-width: 260px;
+    margin-right: 20px;
+  }
+}

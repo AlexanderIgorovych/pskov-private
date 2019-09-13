@@ -1,0 +1,57 @@
+.place {
+  display: flex;
+  flex-direction: column;
+}
+
+.cash-block-component {
+  margin-left: 10px;
+  ::ng-deep .creator-block {
+    min-height: auto;
+    height: auto;
+    margin: 0;
+  }
+
+  ::ng-deep .step-body {
+    padding: 10px;
+    min-height: 100px;
+  }
+}
+
+.radio-button {
+  margin: 5px;
+}
+.affiliate-custom {
+  margin-top: 15px;
+}
+
+.affilate-form {
+  margin-top: 15px;
+  max-width: 350px;
+}
+
+@media (min-width: 321px) and (max-width: 765px) {
+  .cash-block-component {
+    ::ng-deep {
+      .creator-block {
+        min-width: 330px;
+      }
+    }
+  }
+}
+
+@media (max-width: 688px) {
+  .creator-block-footer {
+    display: flex;
+    flex-direction: column-reverse;
+
+    .confirmed-caption {
+      width: 200px;
+      margin-top: 5px;
+      display: row;
+
+      br {
+        display: none;
+      }
+    }
+  }
+}

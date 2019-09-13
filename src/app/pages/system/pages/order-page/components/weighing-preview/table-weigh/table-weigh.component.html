@@ -1,0 +1,58 @@
+<div *ngIf="isContainer === 'weighning'" class="container-btn">
+  <button (click)="handleRedirectMobile()" class='isMobile work-with-table'>ПЕРЕЙТИ К РАБОТЕ С ТАБЛИЦЕЙ</button>
+  <button (click)="onCreateContainer()"  *ngIf="defaultTable" [disabled]="!isTrailerPicked || isSelectedContainer" type='button' class='btn-next-container'>
+    <span class="isFullScreen">ПЕРЕЙТИ К ВЗВЕШИВАНИЮ СЛЕДУЮЩЕГО КОНТЕЙНЕРА</span>
+    <span class='isMobile'>ПЕРЕЙТИ К ВЗВЕШ. СЛЕД. КОНТЕЙНЕРА</span>
+  </button>
+  <button type='button' (click)="onTableSubmit()" class='btn-submit-weigh'>ЗАВЕРШИТЬ ВЗВЕШВАНИЯ</button>
+</div>
+<table class='table' [ngClass]="{ 'table-weigh-block' : !isMobile }" cellspacing='0'>
+  <tr [ngClass]="{ 'cutter-row' : tableType === 1, 'invertoy-table' : tableType === 2 }" class='table-header'>
+    <td>Дата/<br>Время</td>
+    <td *ngIf="tableType === 0 && tableType !== 2">Машина</td>
+    <td *ngIf="tableType === 1 && tableType !== 2">Мастер-резчик</td>
+    <td *ngIf="tableType === 0">Вид лома / Отходов</td>
+    <td *ngIf="tableType === 1 || tableType === 2">Вид лома</td>
+    <td>Вес</td>
+    <td *ngIf="tableType === 0">Тара</td>
+    <td>Ошиб. <br>взвш.</td>
+    <td>Весы</td>
+    <td>Биг-бэги</td>
+    <td>Тип бигбэгов</td>
+    <td>Действия</td>
+  </tr>
+
+  <!-- Already Saved Table -->
+  <tr *ngFor="let data of tableData; let idx = index;" class='table-body current'>
+    <td>{{ data.date.toLocaleString() }}</td>
+    <td *ngIf="tableType !== 2">{{ data.car !== null ? data.car : data.cutter }}</td>
+    <td>{{ data.typeScrap === null ? '-' : data.typeScrap }}</td>
+    <td>{{ data.weigh === null ? '-' : data.weigh }}</td>
+    <td *ngIf="tableType === 0">{{ data.tare === null ? '-' : data.tare }}</td>
+    <td>{{ data.errorWeigh === null ? '-' : data.errorWeigh }}</td>
+    <td>{{ data.weighter=== null ? '-' : data.weighter  }}</td>
+    <td>{{ data.bigbag === null ? '-' : data.bigbag }}</td>
+    <td>{{ data.typeBigbag === null ? '-' : data.typeBigbag.name }}</td>
+    <td class='action-td'>
+      <div class='table-action'>
+        <div (click)="handleIssue(data, isContainer)">
+          <p [ngClass]="{ 'active' : data.weigh !== null && data.isIssue === false }">Отметить как ошибочное</p>
+        </div>
+        <div class='pen-icon'>
+          <!-- #DADADA -->
+          <div *ngIf="data.weigh === null || data.isIssue !== false">
+            <svg width="24" height="26" viewBox="0 0 24 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M3 18.1574V22.055H6.75L17.81 10.5596L14.06 6.66194L3 18.1574V18.1574ZM20.71 7.5454C21.1 7.14005 21.1 6.48525 20.71 6.07989L18.37 3.64777C17.98 3.24241 17.35 3.24241 16.96 3.64777L15.13 5.54981L18.88 9.44745L20.71 7.5454V7.5454Z" fill="#DADADA"/>
+            </svg>
+          </div>
+          <div (click)="onEditTable(data.id, data.tare, isContainer)" class='active' *ngIf="data.weigh !== null && data.isIssue === false">
+            <svg width="24" height="26" viewBox="0 0 24 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M3 18.1574V22.055H6.75L17.81 10.5596L14.06 6.66194L3 18.1574V18.1574ZM20.71 7.5454C21.1 7.14005 21.1 6.48525 20.71 6.07989L18.37 3.64777C17.98 3.24241 17.35 3.24241 16.96 3.64777L15.13 5.54981L18.88 9.44745L20.71 7.5454V7.5454Z" fill="#109754"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </td>
+  </tr>
+
+</table>

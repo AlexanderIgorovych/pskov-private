@@ -1,0 +1,93 @@
+<div class="step">
+  <mat-card class="photo-container" *ngIf="(pickedPartner | async) as partner">
+    <div>
+      <div class="photo-container">
+        <app-add-photo
+          id="ttn"
+          [nameType]="'ttn'"
+          *ngIf="partner.type === 1"
+          [title]="'Добавьте ТТН'"
+          [files]="filesTtn"
+          (photoPicked)="generateFile($event, filesTtn)"
+          (photoDeleted)="deletePhoto($event, filesTtn)"
+        ></app-add-photo>
+        <app-add-photo
+          [nameType]="'passport'"
+          id="passport"
+          class='element-docs'
+          *ngIf="partner.type === 0 && partner.local === true"
+          [title]="'Добавьте паспорт гражданина РФ'"
+          [files]="files"
+          (photoPicked)="generateFile($event, files)"
+          (photoDeleted)="deletePhoto($event, files)"
+        ></app-add-photo>
+
+        <app-add-photo
+          [nameType]="'international'"
+          id="international_passport"
+          class='element-docs'
+          *ngIf="partner.type === 0 && partner.local === false"
+          [title]="'Добавьте иностранный паспорт'"
+          [files]="filesForeign"
+          (photoPicked)="generateFile($event, filesForeign)"
+          (photoDeleted)="deletePhoto($event, filesForeign)"
+        ></app-add-photo>
+        <app-add-photo
+          id="photo"
+          [nameType]="'requisites'"
+          class='element-docs'
+          *ngIf="partner.type === 0 && partner.local === false"
+          [title]="'Свидетельство о регистрации по месту жительства'"
+          [files]="filesRegistration"
+          (photoPicked)="generateFile($event, filesRegistration)"
+          (photoDeleted)="deletePhoto($event, filesRegistration)"
+        ></app-add-photo>
+      </div>
+
+      <div class="creator-block-footer row ">
+        <button
+          (click)="sendDocuments()"
+          mat-flat-button
+          [disabled]="!areFilled || isDocumentSended"
+          class="button button-primary"
+          type="submit"
+          color="none"
+        >
+          ОТПРАВИТЬ ОПЕРАТОРУ
+        </button>
+      </div>
+    </div>
+  </mat-card>
+
+  <div class="row row--right">
+    <button
+      (click)="nextStepHandle()"
+      [disabled]="!isDocumentSended"
+      mat-flat-button
+      class="button button-primary"
+      type="submit"
+      color="none"
+    >
+      ПРОДОЛЖИТЬ
+    </button>
+  </div>
+  <div class="row row--right">
+    <button
+      (click)="invokeSkipModal()"
+      mat-button
+      class="mat-button"
+      type="submit"
+      color="none"
+    >
+      ПРОПУСТИТЬ ШАГ
+    </button>
+  </div>
+
+  <div class="info-temporary-storage">
+    <div class="row row--right-sm">
+      <div class="disclamer">
+        Если вы пропустите этот шаг, лом будет поставлен на ответственное хранение
+      </div>
+    </div>
+  </div>
+</div>

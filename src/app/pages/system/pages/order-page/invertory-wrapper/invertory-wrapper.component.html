@@ -1,0 +1,29 @@
+<div class="order">
+  <mat-toolbar class="order-header">
+    <div class="container order-header-body">
+      <button class='back-icon-btn' mat-icon-button>
+        <mat-icon class='back-icon' [routerLink]="['/system']" aria-label="Example icon-button with a heart icon">arrow_back</mat-icon>
+      </button>
+      <span class="order-title">{{ title }}</span>
+    </div>
+  </mat-toolbar>
+
+  <div class="block">
+    <div class="tabs">
+
+      <mat-tab-group
+        class="scrollbar"
+        [selectedIndex]="selected"
+        (selectedIndexChange)="selected = $event"
+        color="none">
+        <!-- 3 || 5 -->
+        <mat-tab
+          *ngFor="let item of menuItemsInvertory; let i = index"
+          [label]="item.label">
+
+          <app-weighing-preview [isDefault]="false" withCutter="false" [recievedData]='2'></app-weighing-preview>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </div>
+</div>

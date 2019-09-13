@@ -1,0 +1,55 @@
+<div class="cash-block-component">
+  <app-form-card [title]="'УКАЖИТЕ МЕСТО ОПЛАТЫ'">
+    <ng-container body>
+      <mat-radio-group class="place" [(ngModel)]="pickedPlace">
+        <mat-radio-button
+          class="radio-button"
+          *ngFor="let place of places"
+          [value]="place"
+          (change)="handlePicked(place)"
+          [checked]="pickedPlace === place"
+          color="primary"
+
+        >
+          {{ place }}
+        </mat-radio-button>
+      </mat-radio-group>
+      <ng-container *ngIf="pickedPlace === 'другой участок'">
+        <div class="affilate-form">
+          <mat-select
+            class='input-main'
+            [value]="pickedAffiliate"
+            (selectionChange)="pickAffiliate($event)"
+            [placeholder]="
+              pickedAffiliate ? pickedPlaceholder : defaultPlaceholder
+            "
+          >
+            <mat-option *ngFor="let aff of affiliates" value="{{ aff.id }}">
+              {{ aff.name }}
+            </mat-option>
+          </mat-select>
+        </div>
+      </ng-container>
+    </ng-container>
+    <ng-container footer>
+      <div class="creator-block-footer row">
+        <div class="confirmed-caption" *ngIf="requestedPay">
+          <img src="assets/confirm-phone.png" alt="" />
+          <span>Запрос на выплату
+          наличными <br />
+          средствами отправлен оператору.</span>
+        </div>
+        <button
+          [disabled]="enabledConfirm ? false : true"
+          mat-flat-button
+          class="button button-primary"
+          type="submit"
+          color="none"
+          (click)="requestingPay()"
+        >
+          ОТПРАВИТЬ ЗАПРОС
+        </button>
+      </div>
+    </ng-container>
+  </app-form-card>
+</div>
