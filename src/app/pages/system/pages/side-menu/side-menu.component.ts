@@ -47,7 +47,7 @@ export class SideMenuComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.router.navigate(['/system', 'order']);
+        this.router.navigate(['/system', 'order-psa', '1']);
       }
     });
 
