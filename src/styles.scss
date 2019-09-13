@@ -1,0 +1,22 @@
+// @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import './scss/theme.scss';
+@import './scss/partials';
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+html,
+body {
+  height: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0 !important;
+  padding: 0;
+  width: 100vw;
+  position: relative;
+}
+
+.mat-step-icon,
+.mat-step-icon-not-touched {
+  color: #fff !important;
+}

@@ -1,0 +1,33 @@
+<div class="auth-title">ВВЕДИТЕ СВОЙ КОД ПОЛЬЗОВАТЕЛЯ</div>
+<form class="form" action="" #form_login [formGroup]='form' (ngSubmit)="onSubmit()">
+
+  <app-form-field>
+    <app-input-main>
+      <input
+        #mainInput="appInputRef"
+        appInputRef
+        name="number"
+        placeholder="Введите 6 символов"
+        formControlName="number"
+      >
+      <mat-icon (click)="mainInput.toggleType()">{{ mainInput.hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </app-input-main>
+
+    <span *ngIf="isAsyncError" class='input-error'>Вы ввели неправильный код</span>
+    
+    <div class="form-field-errors" *ngIf="form.get('number').invalid && form.get('number').touched">
+      <span *ngIf="form.get('number') ['errors'] ['required']">Поле не может быть пустым.</span>
+      <span *ngIf="form.get('number') ['errors'] ['minlength']">Номер должен быть длиной в 6 символов. Cейчас {{ form.get('number') ['errors'] ['minlength'] ['actualLength'] }}.</span>
+      <span *ngIf="form.get('number') ['errors'] ['maxlength']">Номер должен быть длиной в 6 символов. Cейчас {{ form.get('number') ['errors'] ['maxlength'] ['actualLength'] }}.</span>
+      <span *ngIf="form.get('number') ['errors'] ['isNumber']">Введите число.</span>
+    </div>
+  </app-form-field>
+
+
+  <div class='step-footer' footer>
+    <div class="form-button">
+      <button type="submit" mat-raised-button [disabled]="form.invalid">ВОЙТИ</button>
+    </div>
+  </div>
+
+</form>
